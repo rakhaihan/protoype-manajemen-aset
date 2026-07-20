@@ -489,6 +489,24 @@ table{ border-collapse:separate; border-spacing:0; }
 .confirm__text{ font-size:13.5px; color:var(--text-secondary); }
 .confirm__text strong{ color:var(--text); }
 
+/* Modal Detail Kendaraan (read-only) */
+.detail-head{ display:flex; gap:var(--s4); margin-bottom:var(--s5); }
+.detail-head img{
+    width:132px; height:96px; object-fit:cover; flex:0 0 auto;
+    border-radius:var(--r); border:1px solid var(--border);
+    background:var(--surface-sunken);
+}
+.detail-head__id{ min-width:0; }
+.detail-head__id h3{ font-size:17px; font-weight:600; letter-spacing:-.01em; margin-bottom:6px; }
+.detail-head__meta{ display:flex; flex-wrap:wrap; align-items:center; gap:var(--s2); }
+.detail-grid{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:var(--s4) var(--s5);
+    padding-top:var(--s5); border-top:1px solid var(--border);
+}
+.detail-grid dt{ font-size:12px; color:var(--text-muted); margin-bottom:3px; }
+.detail-grid dd{ font-size:14px; font-weight:500; color:var(--text); }
+
 /* ---------------------------------------------- 13. MODE KARTU (GRID VIEW) --
    Kartu admin memakai markup tabel yang sama: satu sumber data, tanpa duplikasi
    10 baris. Tiap <tr> menjadi kartu dan tiap <td> ditempatkan lewat grid-area,
@@ -864,7 +882,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">12 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Hiace"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Hiace"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Hiace" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Hiace"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Hiace" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -883,7 +901,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">11 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Medium Bus"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Medium Bus"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Medium Bus" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Medium Bus"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Medium Bus" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -902,7 +920,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">09 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Mitsubishi Fuso"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Mitsubishi Fuso"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Mitsubishi Fuso" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Mitsubishi Fuso"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Mitsubishi Fuso" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -921,7 +939,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">08 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Ambulance"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Ambulance"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Ambulance" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Ambulance"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Ambulance" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -940,7 +958,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">07 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail IONIQ 5"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail IONIQ 5"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit IONIQ 5" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat IONIQ 5"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus IONIQ 5" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -959,7 +977,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">06 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Toyota Camry"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Toyota Camry"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Toyota Camry" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Toyota Camry"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Toyota Camry" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -978,7 +996,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">04 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Mitsubishi Xpander"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Mitsubishi Xpander"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Mitsubishi Xpander" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Mitsubishi Xpander"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Mitsubishi Xpander" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -997,7 +1015,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">02 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Toyota Hiace B 7415 SPA"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Toyota Hiace B 7415 SPA"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Toyota Hiace B 7415 SPA" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Toyota Hiace B 7415 SPA"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Toyota Hiace B 7415 SPA" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -1016,7 +1034,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">01 Jul 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Toyota Hiace B 7417 SPA"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Toyota Hiace B 7417 SPA"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Toyota Hiace B 7417 SPA" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Toyota Hiace B 7417 SPA"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Toyota Hiace B 7417 SPA" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -1035,7 +1053,7 @@ table{ border-collapse:separate; border-spacing:0; }
                     <td class="cell-updated muted tabnum" data-label="Terakhir update">28 Jun 2026</td>
                     <td class="cell-actions" data-label="Aksi">
                         <div class="actions">
-                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Fortuner"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Lihat Detail" data-modal-open="modalDetail" aria-label="Detail Fortuner"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
                             <button class="icon-btn" type="button" title="Edit" aria-label="Edit Fortuner" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
                             <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Fortuner"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
                             <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Fortuner" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
@@ -1262,6 +1280,53 @@ table{ border-collapse:separate; border-spacing:0; }
 </div>
 
 <!-- --------------------------------------------------- Konfirmasi hapus -->
+<!-- ------------------------------------------------------ Detail kendaraan --
+     Read-only. Tidak berisi form maupun aksi Pinjam/Timeline/Status - itu
+     milik antarmuka pengguna publik. JS mengisi kontennya dari baris tabel
+     yang diklik, jadi tidak ada data yang diduplikasi di markup ini. -->
+<div class="modal" id="modalDetail" role="dialog" aria-modal="true" aria-labelledby="modalDetailTitle" hidden>
+    <div class="modal__dialog">
+        <div class="modal__header">
+            <div>
+                <h2 class="modal__title" id="modalDetailTitle">Detail Kendaraan</h2>
+                <p class="modal__desc">Data lengkap kendaraan dinas, hanya untuk dilihat.</p>
+            </div>
+            <button class="modal__close" type="button" aria-label="Tutup" data-modal-close>
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div class="modal__body">
+            <div class="detail-head">
+                <img id="detailThumb" src="" alt="">
+                <div class="detail-head__id">
+                    <h3 id="detailNama"></h3>
+                    <div class="detail-head__meta">
+                        <span class="plate tabnum" id="detailPlat"></span>
+                        <span id="detailStatus"></span>
+                    </div>
+                </div>
+            </div>
+
+            <dl class="detail-grid">
+                <div><dt>Kategori</dt><dd id="detailKategori"></dd></div>
+                <div><dt>Tahun</dt><dd id="detailTahun"></dd></div>
+                <div><dt>Kode Barang</dt><dd id="detailKode"></dd></div>
+                <div><dt>Kapasitas</dt><dd id="detailKapasitas"></dd></div>
+                <div><dt>Kondisi</dt><dd id="detailKondisi"></dd></div>
+                <div><dt>Terakhir Update</dt><dd id="detailUpdate"></dd></div>
+            </dl>
+        </div>
+
+        <div class="modal__footer">
+            <button class="btn btn--secondary" type="button" data-modal-close>Tutup</button>
+            <button class="btn btn--primary" type="button" id="detailEditBtn">
+                <i class="bi bi-pencil" aria-hidden="true"></i> Edit Kendaraan
+            </button>
+        </div>
+    </div>
+</div>
+
 <div class="modal" id="modalHapus" role="alertdialog" aria-modal="true" aria-labelledby="modalHapusTitle" hidden>
     <div class="modal__dialog modal__dialog--sm">
         <div class="modal__body">
@@ -1340,6 +1405,107 @@ table{ border-collapse:separate; border-spacing:0; }
             apply(view);
             try { localStorage.setItem(KEY, view); } catch (e) {}
         });
+    }
+})();
+</script>
+
+<script>
+/* ===========================================================================
+   Modal generik: buka/tutup
+   - Berlaku untuk semua modal (Tambah, Edit, Hapus, Detail) lewat atribut
+     data-modal-open / data-modal-close yang sudah ada di markup.
+   - Detail diisi dinamis dari <tr> yang diklik, sehingga data kendaraan
+     hanya ada satu sumber: baris tabel itu sendiri.
+   =========================================================================== */
+(function () {
+    var openModal = function (modal, trigger) {
+        modal.hidden = false;
+        modal.dataset.returnFocus = '';
+        if (trigger) { modal._trigger = trigger; }
+        var closeBtn = modal.querySelector('[data-modal-close], .modal__close');
+        (closeBtn || modal).focus({ preventScroll: true });
+    };
+    var closeModal = function (modal) {
+        modal.hidden = true;
+        if (modal._trigger) { modal._trigger.focus({ preventScroll: true }); }
+    };
+
+    document.addEventListener('click', function (e) {
+        var openBtn = e.target.closest('[data-modal-open]');
+        if (openBtn) {
+            var modal = document.getElementById(openBtn.getAttribute('data-modal-open'));
+            if (modal) {
+                if (modal.id === 'modalDetail') { fillDetailModal(openBtn); }
+                openModal(modal, openBtn);
+            }
+            return;
+        }
+        var closeBtn = e.target.closest('[data-modal-close]');
+        if (closeBtn) {
+            var m = closeBtn.closest('.modal');
+            if (m) { closeModal(m); }
+            return;
+        }
+        // klik pada overlay (di luar .modal__dialog) menutup modal
+        if (e.target.classList.contains('modal') && !e.target.hidden) {
+            closeModal(e.target);
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        var open = document.querySelector('.modal:not([hidden])');
+        if (open) { closeModal(open); }
+    });
+
+    /* Ambil data dari <tr> yang tombol "Lihat Detail"-nya diklik, lalu isi
+       modal Detail. Tidak ada data kendaraan yang disalin ke markup modal. */
+    function fillDetailModal(triggerBtn) {
+        var row = triggerBtn.closest('tr');
+        if (!row) return;
+
+        var img = row.querySelector('.cell-thumb img');
+        var nama = row.querySelector('.cell-name strong');
+        var subNama = row.querySelector('.cell-name span');
+        var plat = row.querySelector('.cell-plate .plate');
+        var statusBadge = row.querySelector('.cell-status .badge');
+        var kategoriFull = row.querySelector('.cell-kat .kat-full') || row.querySelector('.cell-kat .kat');
+        var tahun = row.querySelector('.cell-year');
+        var kondisiBadge = row.querySelector('.cell-cond .badge');
+        var update = row.querySelector('.cell-updated');
+
+        var setText = function (id, text) { document.getElementById(id).textContent = text || '-'; };
+        var setHTML = function (id, html) { document.getElementById(id).innerHTML = html || '-'; };
+
+        if (img) {
+            var detailImg = document.getElementById('detailThumb');
+            detailImg.src = img.src;
+            detailImg.alt = img.alt;
+        }
+        setText('detailNama', nama ? nama.textContent : '');
+        setText('detailPlat', plat ? plat.textContent : '');
+        setHTML('detailStatus', statusBadge ? statusBadge.outerHTML : '');
+        setText('detailKategori', kategoriFull ? kategoriFull.textContent : '');
+        setText('detailTahun', tahun ? tahun.textContent : '');
+        setHTML('detailKondisi', kondisiBadge ? kondisiBadge.outerHTML : '');
+        setText('detailUpdate', update ? update.textContent : '');
+
+        // "Kode 10012345 - 8 orang" -> pisahkan Kode Barang & Kapasitas
+        var kode = '-', kapasitas = '-';
+        if (subNama) {
+            var parts = subNama.textContent.split('\u00b7');
+            if (parts[0]) kode = parts[0].replace(/^Kode\s*/i, '').trim();
+            if (parts[1]) kapasitas = parts[1].trim();
+        }
+        setText('detailKode', kode);
+        setText('detailKapasitas', kapasitas);
+
+        // "Edit Kendaraan" di footer detail membuka modalEdit untuk baris yang sama
+        document.getElementById('detailEditBtn').onclick = function () {
+            closeModal(document.getElementById('modalDetail'));
+            var editModal = document.getElementById('modalEdit');
+            openModal(editModal, triggerBtn);
+        };
     }
 })();
 </script>
