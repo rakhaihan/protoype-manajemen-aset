@@ -241,33 +241,22 @@ void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,win
                 <p class="kv-page-subtitle">Kelola dan pantau aset kendaraan dinas Kementerian Pekerjaan Umum.</p>
             </div>
 
+            <dl class="kv-stats" id="kvStats">
+                <div class="kv-stat">
+                    <dt>Total armada</dt>
+                    <dd><span data-kv-stat="total">0</span></dd>
+                </div>
+                <div class="kv-stat kv-stat--available">
+                    <dt><span class="kv-dot"></span>Tersedia</dt>
+                    <dd><span data-kv-stat="tersedia">0</span></dd>
+                </div>
+                <div class="kv-stat kv-stat--borrowed">
+                    <dt><span class="kv-dot"></span>Dipinjam</dt>
+                    <dd><span data-kv-stat="dipinjam">0</span></dd>
+                </div>
+            </dl>
         </div>
     </header>
-
-    <!-- =============================================== RINGKASAN ARMADA ==
-         Statistik dipindah keluar dari header menjadi dashboard summary
-         tersendiri: breadcrumb > judul > deskripsi > statistik > filter.
-         ================================================================== -->
-    <section class="kv-summary" aria-label="Ringkasan armada">
-        <dl class="kv-stats" id="kvStats">
-            <div class="kv-stat">
-                <dt>Total Armada</dt>
-                <dd><span data-kv-stat="total">0</span></dd>
-            </div>
-            <div class="kv-stat kv-stat--available">
-                <dt><span class="kv-dot"></span>Tersedia</dt>
-                <dd><span data-kv-stat="tersedia">0</span></dd>
-            </div>
-            <div class="kv-stat kv-stat--borrowed">
-                <dt><span class="kv-dot"></span>Dipinjam</dt>
-                <dd><span data-kv-stat="dipinjam">0</span></dd>
-            </div>
-            <div class="kv-stat kv-stat--verify">
-                <dt><span class="kv-dot"></span>Dalam Verifikasi</dt>
-                <dd><span data-kv-stat="verifikasi">0</span></dd>
-            </div>
-        </dl>
-    </section>
 
     <!-- ===================== Filter toolbar ===================== -->
     <div class="filter-bar" role="search">
@@ -2529,7 +2518,7 @@ body{
 /* ================================================================= HEADER */
 .kv-page-header{
     padding:var(--kv-s7) 0 var(--kv-s6);
-    margin-bottom:var(--kv-s6);   /* statistik kini menyusul di bawahnya */
+    margin-bottom:var(--kv-s7);
     border-bottom:1px solid var(--kv-border);
 }
 .kv-breadcrumb{
@@ -2559,44 +2548,32 @@ body{
 }
 
 /* --- summary figures: plain, tabular, no ornament --- */
-/* --- Ringkasan armada -----------------------------------------------------
-   Empat kartu terpisah dalam satu baris, dipusatkan terhadap container.
-   Sebelumnya satu blok gabungan berpembatas di pojok kanan header; kini
-   berdiri sendiri sebagai fokus utama sebelum pencarian.
-   ------------------------------------------------------------------------ */
-.kv-summary{ margin:0 0 var(--kv-s7); }     /* jarak 32px ke filter */
-
 .kv-stats{
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:18px;
-    max-width:960px;
-    margin:0 auto;                          /* terpusat terhadap container */
-    padding:0;
+    display:grid; grid-auto-flow:column; grid-auto-columns:minmax(120px,1fr);
+    gap:0;
+    margin:0; padding:0;
+    border:1px solid var(--kv-border);
+    border-radius:var(--kv-radius);
+    background:var(--kv-surface);
+    overflow:hidden;
 }
 .kv-stat{
-    display:flex; flex-direction:column-reverse;
-    justify-content:center; align-items:center; text-align:center;
-    gap:var(--kv-s1);
-    min-height:90px;
-    padding:var(--kv-s3) var(--kv-s4);
-    background:var(--kv-surface);
-    border:1px solid var(--kv-border);
-    border-radius:var(--kv-radius-lg);
+    display:flex; flex-direction:column-reverse; gap:2px;
+    padding:var(--kv-s3) var(--kv-s5);
 }
+.kv-stat + .kv-stat{ border-left:1px solid var(--kv-border); }
 .kv-stat dt{
-    display:flex; align-items:center; justify-content:center; gap:6px;
-    font-size:13.5px; font-weight:400; letter-spacing:0;
+    display:flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:400; letter-spacing:0;
     color:var(--kv-text-muted); margin:0; white-space:nowrap;
 }
 .kv-stat dd{
-    margin:0; font-size:38px; font-weight:600; line-height:1.1;
-    letter-spacing:-.025em; color:var(--kv-text);
+    margin:0; font-size:24px; font-weight:600; line-height:1.2;
+    letter-spacing:-.02em; color:var(--kv-text);
 }
 .kv-dot{ width:6px; height:6px; border-radius:50%; background:var(--kv-text-muted); flex:0 0 auto; }
 .kv-stat--available .kv-dot{ background:var(--kv-available); }
 .kv-stat--borrowed  .kv-dot{ background:var(--kv-borrowed); }
-.kv-stat--verify    .kv-dot{ background:var(--kv-verify); }
 
 /* ================================================================ TOOLBAR */
 .filter-bar{
@@ -3110,8 +3087,7 @@ body{
 .kv-empty__action{ width:auto; padding:0 var(--kv-s5); }
 
 /* ============================================================== RESPONSIVE */
-@media (max-width:991px){          /* tablet: 2x2 */
-    .kv-stats{ grid-template-columns:repeat(2,minmax(0,1fr)); max-width:520px; }
+@media (max-width:991px){
     .kv-toolbar{ grid-template-columns:repeat(2,minmax(0,1fr)); }
     .kv-field--search{ grid-column:1 / -1; }
 }
@@ -3119,17 +3095,13 @@ body{
     .kv-page-header{ padding-top:var(--kv-s6); margin-bottom:var(--kv-s6); }
     .kv-page-title{ font-size:26px; }
     .kv-page-header__row{ align-items:flex-start; }
-    .kv-stats{ width:100%; }
-    .kv-stat{ padding:var(--kv-s3); min-height:84px; }
-    .kv-stat dd{ font-size:32px; }
+    .kv-stats{ width:100%; grid-auto-columns:minmax(0,1fr); }
+    .kv-stat{ padding:var(--kv-s3); }
+    .kv-stat dd{ font-size:20px; }
     .filter-bar{ position:static; padding:var(--kv-s4); margin-bottom:var(--kv-s6); }
     .kv-toolbar{ grid-template-columns:minmax(0,1fr); }
     .kv-field--toggle{ display:none; }
     .vc-actions__row{ grid-template-columns:minmax(0,1fr); }
-}
-@media (max-width:575px){          /* ponsel: statistik bertumpuk vertikal.
-       Harus berada setelah blok 991px, kalau tidak aturan 2 kolom yang menang. */
-    .kv-stats{ grid-template-columns:minmax(0,1fr); max-width:320px; }
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -3230,12 +3202,11 @@ body{
         var allCards = Array.prototype.slice.call(document.querySelectorAll('.vehicle-card'));
 
         (function renderStats() {
-            var counts = { total: allCards.length, tersedia: 0, dipinjam: 0, verifikasi: 0 };
+            var counts = { total: allCards.length, tersedia: 0, dipinjam: 0 };
             allCards.forEach(function (card) {
                 var s = (card.dataset.status || '');
                 if (s.indexOf('tersedia') !== -1) counts.tersedia++;
                 else if (s.indexOf('dipinjam') !== -1) counts.dipinjam++;
-                else if (s.indexOf('verifikasi') !== -1) counts.verifikasi++;
             });
             Object.keys(counts).forEach(function (key) {
                 var el = document.querySelector('[data-kv-stat="' + key + '"]');
