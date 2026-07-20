@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="id" data-view="table">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kendaraan — Administrasi Aset | Kementerian Pekerjaan Umum</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<script>
+/* Mode tampilan dipulihkan sebelum render pertama supaya pengguna yang
+   menyimpan mode kartu tidak melihat kedip tabel-lalu-kartu. Default: tabel. */
+(function () {
+    var v = 'table';
+    try { if (localStorage.getItem('simanset.admin.kendaraan.view') === 'grid') v = 'grid'; } catch (e) {}
+    document.documentElement.setAttribute('data-view', v);
+})();
+</script>
+
+<style>
+/* ============================================================================
+   ADMIN — KENDARAAN
+   Kementerian Pekerjaan Umum
+
+   Satu blok CSS, tanpa dependensi framework, siap dipindah ke
+   assets/css/admin-kendaraan.css apa adanya.
+
+   Struktur:
+     1. Design tokens          7. Badge status & kondisi
+     2. Base / reset           8. Icon button aksi
+     3. Navbar                 9. Pagination
+     4. Page header + summary 10. Empty state
+     5. Toolbar filter        11. Modal
+     6. Data table            12. Responsive & media
+   ========================================================================== */
+
+/* ------------------------------------------------------- 1. DESIGN TOKENS */
+:root{
+    /* navy PU — satu-satunya warna brand */
+    --navy:#1e3a6e;
+    --navy-hover:#18305c;
+    --navy-active:#132648;
+    --navy-ring:rgba(30,58,110,.20);
+
+    /* netral */
+    --bg:#f7f9fc;
+    --surface:#ffffff;
+    --surface-sunken:#f8fafc;
+    --surface-hover:#f8fafc;
+    --border:#e5e7eb;
+    --border-control:#d3d8df;
+    --border-strong:#b9c0c9;
+    --text:#16191d;
+    --text-secondary:#4a5158;
+    --text-muted:#6b727b;
+
+    /* status — hanya empat, semuanya bermakna */
+    --st-green:#16703a;  --st-green-bg:#e9f4ed;  --st-green-bd:#c3ddcd;
+    --st-amber:#9a5b06;  --st-amber-bg:#fbf2e4;  --st-amber-bd:#ead4b0;
+    --st-blue:#1a56b8;   --st-blue-bg:#eaf0f9;   --st-blue-bd:#c6d6ef;
+    --st-red:#a92626;    --st-red-bg:#fbeded;    --st-red-bd:#eecfcf;
+
+    /* spasi 4pt */
+    --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s7:32px; --s8:48px;
+
+    /* radius */
+    --r-xs:4px; --r-sm:6px; --r:8px; --r-lg:12px;
+
+    /* elevasi — sangat halus, garis yang bekerja lebih dulu */
+    --shadow-sm:0 1px 1px rgba(22,25,29,.03);
+    --shadow:0 1px 2px rgba(22,25,29,.05);
+    --shadow-modal:0 12px 32px rgba(22,25,29,.16);
+
+    --nav-h:72px;              /* tinggi navbar — dipakai offset sticky thead */
+    --t:150ms;                 /* satu durasi transisi untuk seluruh halaman */
+    --ease:cubic-bezier(.4,0,.2,1);
+    --header-bg:#fafafa;       /* strip kepala tabel */
+    --font:"Inter","IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+}
+
+/* --------------------------------------------------------- 2. BASE / RESET */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+    margin:0;
+    font-family:var(--font);
+    font-size:14px; font-weight:400; line-height:1.55;
+    color:var(--text);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+h1,h2,h3,h4,p,figure,dl,dd{ margin:0; }
+img{ max-width:100%; display:block; }
+button{ font:inherit; color:inherit; }
+table{ border-collapse:separate; border-spacing:0; }
+[hidden]{ display:none !important; }
+:focus-visible{ outline:2px solid var(--navy); outline-offset:2px; border-radius:var(--r-xs); }
+.visually-hidden{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+.tabnum{ font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1; }
+
+.shell{ width:100%; max-width:1320px; margin:0 auto; padding:0 var(--s6); }
+
+/* --------------------------------------------------------------- 3. NAVBAR */
+.navbar{
+    position:sticky; top:0; z-index:100;
+    height:var(--nav-h);
+    display:flex; align-items:center;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+}
+.navbar__inner{ display:flex; align-items:center; justify-content:space-between; gap:var(--s6); width:100%; }
+.navbar__brand{ display:flex; align-items:center; gap:var(--s3); text-decoration:none; flex:0 0 auto; }
+.navbar__brand img{ height:40px; width:auto; }
+.navbar__nav{ display:flex; align-items:center; gap:var(--s1); list-style:none; margin:0; padding:0; }
+.navbar__link{
+    display:inline-flex; align-items:center;
+    padding:8px 14px; border-radius:var(--r-sm);
+    font-size:14px; font-weight:450; line-height:1.4;
+    color:var(--text-secondary); text-decoration:none;
+    transition:background var(--t) ease, color var(--t) ease;
+}
+.navbar__link:hover{ background:var(--surface-hover); color:var(--text); }
+.navbar__link[aria-current="page"]{ background:var(--surface-hover); color:var(--text); font-weight:600; }
+.navbar__divider{ width:1px; height:18px; background:var(--border); margin:0 var(--s2); }
+.navbar__user{
+    display:inline-flex; align-items:center; gap:var(--s2);
+    padding:5px 10px 5px 5px; border-radius:var(--r);
+    border:1px solid var(--border);
+    text-decoration:none; color:var(--text); font-weight:600; font-size:13.5px;
+    transition:background var(--t) ease;
+}
+.navbar__user:hover{ background:var(--surface-hover); }
+.navbar__avatar{
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:600; letter-spacing:.02em;
+}
+.navbar__toggle{
+    display:none;
+    width:38px; height:38px; align-items:center; justify-content:center;
+    background:transparent; border:1px solid var(--border-control);
+    border-radius:var(--r-sm); font-size:18px; color:var(--text-secondary); cursor:pointer;
+}
+
+/* ------------------------------------------------- 4. PAGE HEADER + SUMMARY */
+.page{ padding-bottom:var(--s8); }
+
+.breadcrumb{
+    display:flex; align-items:center; gap:var(--s2);
+    list-style:none; margin:0; padding:var(--s6) 0 0;
+    font-size:12px; color:var(--text-muted);
+}
+.breadcrumb a{ color:var(--text-muted); text-decoration:none; }
+.breadcrumb a:hover{ color:var(--text); text-decoration:underline; }
+.breadcrumb li[aria-current]{ color:var(--text-secondary); font-weight:500; }
+.breadcrumb__sep{ color:var(--border-strong); }
+
+.page-header{
+    display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+    gap:var(--s6);
+    padding:var(--s4) 0 var(--s6);
+    margin-bottom:var(--s6);
+    border-bottom:1px solid var(--border);
+}
+.page-title{ font-size:32px; font-weight:700; letter-spacing:-.021em; line-height:1.25; margin-bottom:6px; }
+.page-subtitle{ font-size:14px; color:var(--text-muted); max-width:60ch; }
+
+/* kartu ringkasan — satu blok berpembatas, angka memimpin */
+.summary{
+    display:grid; grid-auto-flow:column; grid-auto-columns:minmax(120px,1fr);
+    margin:0; padding:0;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--r-lg);
+    overflow:hidden;
+}
+.summary__item{ display:flex; flex-direction:column-reverse; gap:2px; padding:var(--s3) var(--s5); }
+.summary__item + .summary__item{ border-left:1px solid var(--border); }
+.summary__item dt{
+    display:flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:400; color:var(--text-muted); white-space:nowrap;
+}
+.summary__item dd{ font-size:24px; font-weight:600; line-height:1.2; letter-spacing:-.02em; }
+.summary-block{ display:flex; flex-direction:column; align-items:flex-end; gap:var(--s2); }
+.summary__meta{
+    display:flex; align-items:center; gap:6px;
+    font-size:12px; color:var(--text-muted);
+}
+.summary__meta i{ font-size:12px; }
+.summary__sep{ color:var(--border-strong); }
+.summary__delta{ color:var(--st-green); font-weight:500; }
+.dot{ width:6px; height:6px; border-radius:50%; background:var(--text-muted); flex:0 0 auto; }
+.dot--green{ background:var(--st-green); }
+.dot--blue { background:var(--st-blue); }
+.dot--amber{ background:var(--st-amber); }
+.dot--red  { background:var(--st-red); }
+
+/* ------------------------------------------------------- 5. TOOLBAR FILTER */
+.toolbar{
+    display:grid;
+    grid-template-columns:minmax(260px,2.4fr) minmax(150px,1fr) minmax(150px,1fr) auto;
+    gap:var(--s4);
+    align-items:end;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--r-lg);
+    box-shadow:var(--shadow);          /* sedikit lebih menonjol dari panel tabel */
+    padding:var(--s5);
+    margin-bottom:var(--s6);
+}
+.field{ display:flex; flex-direction:column; gap:var(--s2); min-width:0; }
+.field__label{ font-size:12px; font-weight:600; color:var(--text-secondary); }
+.input, .select{
+    width:100%; height:40px;
+    font-family:inherit; font-size:14px; font-weight:400; color:var(--text);
+    background:var(--surface);
+    border:1px solid var(--border-control);
+    border-radius:var(--r-sm);
+    padding:0 var(--s3);
+    transition:border-color var(--t) ease, box-shadow var(--t) ease;
+}
+.input::placeholder{ color:#9aa1a9; }
+.input:hover, .select:hover{ border-color:var(--border-strong); }
+.input:focus, .select:focus{
+    outline:none; border-color:var(--navy); box-shadow:0 0 0 3px var(--navy-ring);
+}
+.select{
+    appearance:none; -webkit-appearance:none; padding-right:34px; cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%236b727b' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right var(--s3) center; background-size:16px;
+}
+/* pencarian dibuat dominan: lebih tinggi, bingkai lebih tegas */
+.field--search .input{
+    height:44px; font-size:14.5px; font-weight:450;
+    border-color:var(--border-strong);
+    padding-left:42px; padding-right:var(--s4);
+}
+.field--search .search > i{ left:var(--s4); font-size:16px; }
+.search{ position:relative; }
+.search > i{
+    position:absolute; left:var(--s3); top:50%; transform:translateY(-50%);
+    color:var(--text-muted); font-size:15px; pointer-events:none;
+}
+
+/* tombol */
+.btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:7px;
+    height:40px; padding:0 var(--s4);
+    font-family:inherit; font-size:13.5px; font-weight:500; line-height:1;
+    white-space:nowrap; cursor:pointer;
+    border:1px solid transparent; border-radius:var(--r-sm);
+    transition:background var(--t) ease, border-color var(--t) ease, color var(--t) ease;
+}
+.btn i{ font-size:14px; }
+.btn--primary{ background:var(--navy); border-color:var(--navy); color:#fff; font-weight:600; }
+.btn--primary:hover{ background:var(--navy-hover); border-color:var(--navy-hover); }
+.btn--primary:active{ background:var(--navy-active); border-color:var(--navy-active); }
+.btn--secondary{ background:var(--surface); border-color:var(--border-control); color:var(--text-secondary); }
+.btn--secondary:hover{ background:var(--surface-hover); border-color:var(--border-strong); color:var(--text); }
+.btn--danger{ background:var(--st-red); border-color:var(--st-red); color:#fff; font-weight:600; }
+.btn--danger:hover{ background:#8f1f1f; border-color:#8f1f1f; }
+.btn--tall{ height:44px; }
+
+/* pengalih mode tampilan - segmented control, tinggi sejajar kontrol lain */
+.action-row{ display:flex; align-items:center; gap:var(--s2); }
+.view-switch{
+    display:inline-flex; height:44px; flex:0 0 auto;
+    background:var(--surface);
+    border:1px solid var(--border-control);
+    border-radius:var(--r-sm);
+    overflow:hidden;
+}
+.view-switch__btn{
+    display:inline-flex; align-items:center; gap:7px;
+    padding:0 var(--s3); border:none; background:transparent;
+    font-family:inherit; font-size:13.5px; font-weight:500; line-height:1;
+    color:var(--text-secondary); white-space:nowrap; cursor:pointer;
+    transition:background var(--t) ease, color var(--t) ease;
+}
+.view-switch__btn + .view-switch__btn{ border-left:1px solid var(--border); }
+.view-switch__btn i{ font-size:15px; }
+.view-switch__btn:hover{ background:var(--surface-hover); color:var(--text); }
+.view-switch__btn[aria-pressed="true"]{
+    background:var(--surface-hover); color:var(--text); font-weight:600;
+    box-shadow:inset 0 0 0 1px var(--border-control);
+}
+.view-switch__btn:focus-visible{ outline:2px solid var(--navy); outline-offset:-2px; }
+
+/* ------------------------------------------------------------ 6. DATA TABLE */
+.panel{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--r-lg);
+    /* tanpa overflow:hidden — kalau di-clip, sticky thead berhenti bekerja */
+}
+.table{ width:100%; font-size:13.5px; }
+
+.table thead th{
+    position:sticky; top:var(--nav-h); z-index:2;
+    background:var(--header-bg);
+    text-align:left; vertical-align:middle;
+    font-size:12px; font-weight:600; letter-spacing:.025em;   /* ~0.3px pada 12px */
+    color:var(--text-secondary);
+    padding:var(--s3) var(--s4);
+    border-bottom:1px solid var(--border-control);            /* pemisah lebih tegas */
+    white-space:nowrap;
+}
+.table thead th:first-child{ border-top-left-radius:var(--r-lg); padding-left:var(--s5); }
+.table thead th:last-child { border-top-right-radius:var(--r-lg); padding-right:var(--s5); text-align:right; }
+
+.table tbody td{
+    padding:var(--s4);
+    border-bottom:1px solid var(--border);
+    vertical-align:middle;
+    color:var(--text-secondary);
+}
+.table tbody td:first-child{ padding-left:var(--s5); }
+.table tbody td:last-child { padding-right:var(--s5); }
+.table tbody tr:last-child td{ border-bottom:none; }
+.table tbody tr{ transition:background var(--t) ease; }
+.table tbody tr:hover{ background:var(--surface-hover); }
+
+/* kolom */
+.col-thumb  { width:112px; }   /* 20px pad-kiri + 72px gambar + 16px pad-kanan */
+.col-name   { min-width:190px; }
+.col-plate  { width:130px; }
+.col-kat    { width:104px; }
+.col-year   { width:80px; }
+.col-status { width:150px; }
+.col-cond   { width:150px; }
+.col-updated{ width:130px; }
+.col-act    { width:160px; }
+
+.thumb{
+    width:72px; height:48px;
+    object-fit:cover; border-radius:var(--r-sm);
+    background:var(--surface-sunken);
+    border:1px solid var(--border);
+}
+.kat{ font-weight:500; letter-spacing:.03em; color:var(--text-secondary);
+      text-decoration:underline dotted var(--border-strong); text-underline-offset:3px; cursor:help; }
+.kat-full{ display:none; }
+.cell-name strong{
+    display:block; font-size:14.5px; font-weight:600; line-height:1.35;
+    color:var(--text); letter-spacing:-.01em;
+}
+.cell-name span{
+    display:block; margin-top:1px;
+    font-size:12px; font-weight:400; line-height:1.4;
+    color:var(--text-muted);
+}
+.plate{
+    display:inline-block;
+    font-size:12.5px; font-weight:600; letter-spacing:.045em; color:var(--text);
+    background:var(--surface-sunken); border:1px solid var(--border-control);
+    border-radius:var(--r-xs); padding:3px 9px; white-space:nowrap;
+}
+.muted{ color:var(--text-muted); }
+
+/* ------------------------------------------------ 7. BADGE STATUS & KONDISI */
+.badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:600; line-height:1.5;
+    padding:2px 9px;
+    border:1px solid transparent; border-radius:var(--r-xs);
+    white-space:nowrap;
+}
+.badge::before{ content:""; width:6px; height:6px; border-radius:50%; background:currentColor; flex:0 0 auto; }
+.badge--green{ color:var(--st-green); background:var(--st-green-bg); border-color:var(--st-green-bd); }
+.badge--amber{ color:var(--st-amber); background:var(--st-amber-bg); border-color:var(--st-amber-bd); }
+.badge--blue { color:var(--st-blue);  background:var(--st-blue-bg);  border-color:var(--st-blue-bd); }
+.badge--red  { color:var(--st-red);   background:var(--st-red-bg);   border-color:var(--st-red-bd); }
+
+/* Kondisi memakai komponen badge yang sama agar konsisten, tetapi varian
+   --quiet tanpa garis tepi sehingga kolom Status tetap lebih dominan. */
+.badge--quiet{ border-color:transparent; font-weight:500; }
+
+/* -------------------------------------------------------- 8. ICON BUTTON AKSI */
+.actions{ display:flex; align-items:center; justify-content:flex-end; gap:6px; }
+.icon-btn{
+    width:32px; height:32px;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:var(--surface);
+    border:1px solid var(--border-control);
+    border-radius:var(--r-sm);
+    color:var(--text-secondary); font-size:14px; cursor:pointer;
+    transition:background var(--t) ease, border-color var(--t) ease, color var(--t) ease;
+}
+.icon-btn:hover{ background:var(--surface-hover); border-color:var(--border-strong); color:var(--text); }
+.icon-btn:active{ background:var(--border); }
+.icon-btn--danger{ color:var(--st-red); }
+.icon-btn--danger:hover{ background:var(--st-red-bg); border-color:var(--st-red-bd); color:var(--st-red); }
+
+/* ---------------------------------------------------------- 9. PAGINATION */
+.table-footer{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--s3);
+    padding:var(--s4) var(--s5);
+    border-top:1px solid var(--border);
+}
+.table-footer__count{ font-size:13px; color:var(--text-muted); }
+.table-footer__count strong{ color:var(--text); font-weight:600; }
+.pagination{ display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+             gap:var(--s1); list-style:none; margin:0; padding:0; }
+.page-btn{
+    min-width:34px; height:34px; padding:0 10px;
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    background:var(--surface); border:1px solid var(--border-control);
+    border-radius:var(--r-sm);
+    font-size:13px; font-weight:500; color:var(--text-secondary);
+    text-decoration:none; cursor:pointer;
+    transition:background var(--t) ease, border-color var(--t) ease, color var(--t) ease;
+}
+.page-btn:hover{ background:var(--surface-hover); border-color:var(--border-strong); color:var(--text); }
+.page-btn[aria-current="page"]{ background:var(--navy); border-color:var(--navy); color:#fff; font-weight:600; }
+.page-btn[aria-disabled="true"]{ color:#a9b0b8; background:var(--surface-sunken); cursor:not-allowed; }
+.page-ellipsis{ padding:0 var(--s1); color:var(--text-muted); }
+
+/* -------------------------------------------------------- 10. EMPTY STATE */
+.empty{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:var(--s8) var(--s6);
+}
+.empty__art{ margin-bottom:var(--s5); color:var(--border-strong); }
+.empty__title{ font-size:16px; font-weight:600; margin-bottom:var(--s2); }
+.empty__text{ font-size:14px; color:var(--text-muted); max-width:46ch; margin-bottom:var(--s6); }
+.empty__actions{ display:flex; flex-wrap:wrap; justify-content:center; gap:var(--s2); }
+
+/* -------------------------------------------------------------- 11. MODAL */
+.modal{
+    position:fixed; inset:0; z-index:200;
+    display:flex; align-items:center; justify-content:center;
+    padding:var(--s6);
+    background:rgba(22,25,29,.45);
+    overflow-y:auto;
+}
+.modal__dialog{
+    width:100%; max-width:640px;
+    background:var(--surface);
+    border-radius:var(--r-lg);
+    box-shadow:var(--shadow-modal);
+    margin:auto;
+}
+.modal__dialog--sm{ max-width:420px; }
+.modal__header{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s4);
+    padding:var(--s5); border-bottom:1px solid var(--border);
+}
+.modal__title{ font-size:16px; font-weight:600; letter-spacing:-.01em; }
+.modal__desc{ font-size:13px; color:var(--text-muted); margin-top:2px; }
+.modal__close{
+    width:30px; height:30px; flex:0 0 auto;
+    display:inline-flex; align-items:center; justify-content:center;
+    background:transparent; border:1px solid transparent; border-radius:var(--r-sm);
+    color:var(--text-muted); font-size:16px; cursor:pointer;
+}
+.modal__close:hover{ background:var(--surface-hover); color:var(--text); }
+.modal__body{ padding:var(--s5); }
+.modal__footer{
+    display:flex; align-items:center; justify-content:flex-end; gap:var(--s2);
+    padding:var(--s5); border-top:1px solid var(--border);
+}
+.form-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s4); }
+.form-grid .field--full{ grid-column:1 / -1; }
+.field__hint{ font-size:12px; color:var(--text-muted); }
+.file-drop{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+    padding:var(--s6); text-align:center;
+    border:1px dashed var(--border-control); border-radius:var(--r);
+    background:var(--surface-sunken);
+    color:var(--text-muted); font-size:13px;
+}
+.file-drop i{ font-size:20px; }
+.confirm{ display:flex; gap:var(--s4); align-items:flex-start; }
+.confirm__icon{
+    width:40px; height:40px; flex:0 0 auto;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:var(--r); font-size:18px;
+    background:var(--st-red-bg); color:var(--st-red); border:1px solid var(--st-red-bd);
+}
+.confirm__text{ font-size:13.5px; color:var(--text-secondary); }
+.confirm__text strong{ color:var(--text); }
+
+/* ---------------------------------------------- 13. MODE KARTU (GRID VIEW) --
+   Kartu admin memakai markup tabel yang sama: satu sumber data, tanpa duplikasi
+   10 baris. Tiap <tr> menjadi kartu dan tiap <td> ditempatkan lewat grid-area,
+   sehingga urutan visual bebas walau urutan DOM tetap urutan kolom tabel.
+   Peran ARIA ditukar oleh JS (table <-> list) agar semantik tetap jujur.
+   Tombol Pinjam/Timeline/Status sengaja tidak ada - itu milik antarmuka
+   pengguna publik, bukan panel administrasi.
+   -------------------------------------------------------------------------- */
+:root[data-view="grid"] .panel{ background:transparent; border:none; border-radius:0; }
+:root[data-view="grid"] .table{ display:block; }
+:root[data-view="grid"] .table thead{ display:none; }
+:root[data-view="grid"] .table tbody{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));   /* desktop */
+    gap:var(--s6);
+}
+@media (max-width:1279px){                           /* laptop */
+    :root[data-view="grid"] .table tbody{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+@media (max-width:1023px){                           /* tablet */
+    :root[data-view="grid"] .table tbody{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--s5); }
+}
+@media (max-width:639px){                            /* ponsel */
+    :root[data-view="grid"] .table tbody{ grid-template-columns:minmax(0,1fr); }
+}
+
+/* kartu: 2 kolom x 7 baris; baris ke-6 (1fr) mendorong bilah aksi ke dasar */
+:root[data-view="grid"] .table tbody tr{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-rows:104px auto auto auto auto 1fr auto;
+    min-height:324px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--r-lg);
+    overflow:hidden;
+    transition:border-color var(--t) ease, box-shadow var(--t) ease;
+}
+:root[data-view="grid"] .table tbody tr:hover{
+    background:var(--surface);
+    border-color:var(--border-control);
+    box-shadow:var(--shadow);
+}
+:root[data-view="grid"] .table tbody td{
+    padding:0; border-bottom:none; min-width:0; vertical-align:top;
+}
+
+/* penempatan tiap sel */
+:root[data-view="grid"] .table tbody td.cell-thumb  { grid-area:1 / 1 / 2 / -1; }
+:root[data-view="grid"] .table tbody td.cell-name   { grid-area:2 / 1 / 3 / -1; padding:var(--s4) var(--s4) 0; }
+:root[data-view="grid"] .table tbody td.cell-plate  { grid-area:3 / 1 / 4 / 2;  padding:var(--s2) 0 0 var(--s4); }
+:root[data-view="grid"] .table tbody td.cell-status { grid-area:3 / 2 / 4 / -1; padding:var(--s2) var(--s4) 0 0;
+                                                      justify-self:end; align-self:center; }
+:root[data-view="grid"] .table tbody td.cell-year   { grid-area:4 / 1 / 5 / 2;  padding:var(--s3) 0 0 var(--s4); }
+:root[data-view="grid"] .table tbody td.cell-kat    { grid-area:4 / 2 / 5 / -1; padding:var(--s3) var(--s4) 0 0; }
+:root[data-view="grid"] .table tbody td.cell-cond   { grid-area:5 / 1 / 6 / 2;  padding:var(--s2) 0 0 var(--s4); }
+:root[data-view="grid"] .table tbody td.cell-updated{ grid-area:5 / 2 / 6 / -1; padding:var(--s2) var(--s4) 0 0; }
+:root[data-view="grid"] .table tbody td.cell-actions{ grid-area:7 / 1 / 8 / -1; align-self:end;
+                                                      padding:var(--s2) var(--s4);
+                                                      border-top:1px solid var(--border); }
+
+/* thumbnail penuh di kepala kartu */
+:root[data-view="grid"] .cell-thumb .thumb{
+    width:100%; height:104px;
+    border:none; border-radius:0;
+    border-bottom:1px solid var(--border);
+}
+
+/* identitas */
+:root[data-view="grid"] .cell-name strong,
+:root[data-view="grid"] .cell-name span{
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+:root[data-view="grid"] .cell-name strong{ font-size:15px; }
+
+/* empat sel metadata: label kecil di atas nilai, memakai data-label yang ada */
+:root[data-view="grid"] .table tbody td.cell-year,
+:root[data-view="grid"] .table tbody td.cell-kat,
+:root[data-view="grid"] .table tbody td.cell-cond,
+:root[data-view="grid"] .table tbody td.cell-updated{
+    display:flex; flex-direction:column; gap:3px;
+    font-size:13px; font-weight:500; color:var(--text);
+}
+:root[data-view="grid"] .table tbody td.cell-year::before,
+:root[data-view="grid"] .table tbody td.cell-kat::before,
+:root[data-view="grid"] .table tbody td.cell-cond::before,
+:root[data-view="grid"] .table tbody td.cell-updated::before{
+    content:attr(data-label);
+    font-size:11.5px; font-weight:400; line-height:1.3; color:var(--text-muted);
+}
+:root[data-view="grid"] .cell-cond .badge{ align-self:flex-start; }
+
+/* bilah aksi: empat tombol sama lebar */
+:root[data-view="grid"] .cell-actions .actions{
+    display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px;
+}
+:root[data-view="grid"] .cell-actions .icon-btn{ width:100%; }
+
+/* panel transparan di mode kartu, jadi footer tidak perlu garis pemisah */
+:root[data-view="grid"] .table-footer{ border-top:none; padding:var(--s5) 0 0; }
+
+/* --------------------------------------------------- 12. RESPONSIVE & MEDIA */
+
+/* Tablet — sembunyikan kolom sekunder agar tabel tetap muat tanpa scroll */
+@media (max-width:1180px){
+    .col-kat, .cell-kat, .col-updated, .cell-updated{ display:none; }
+}
+@media (max-width:980px){
+    .col-year, .cell-year, .col-cond, .cell-cond{ display:none; }
+    .navbar__nav, .navbar__divider{ display:none; }
+    .navbar__toggle{ display:inline-flex; }
+    .toolbar{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .field--search{ grid-column:1 / -1; }
+    .field--action{ grid-column:1 / -1; }
+    .field--action .btn{ width:100%; }
+}
+
+/* Mobile — tabel berubah menjadi kartu bertumpuk */
+@media (max-width:767px){
+    /* Penumpukan tabel menjadi kartu di ponsel hanya berlaku untuk MODE TABEL.
+       Mode kartu punya tata letaknya sendiri di seksi 13, jadi kedua aturan
+       tidak pernah saling menimpa. */
+    .shell{ padding:0 var(--s4); }
+    .page-title{ font-size:26px; }
+    .page-header{ align-items:flex-start; }
+    /* empat kolom terlalu sempit di ponsel: label terpotong. Jadikan 2x2,
+       tinggi kartu tetap sama. */
+    .summary{ width:100%; grid-auto-flow:row; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .summary__item{ padding:var(--s3); }
+    .summary__item + .summary__item{ border-left:none; }
+    .summary__item:nth-child(even){ border-left:1px solid var(--border); }
+    .summary__item:nth-child(n+3){ border-top:1px solid var(--border); }
+    .summary__item dd{ font-size:20px; }
+    .summary-block{ align-items:flex-start; width:100%; }
+    .toolbar{ grid-template-columns:minmax(0,1fr); padding:var(--s4); }
+
+    :root[data-view="table"] .panel{ background:transparent; border:none; border-radius:0; }
+    :root[data-view="table"] .table,
+    :root[data-view="table"] .table tbody,
+    :root[data-view="table"] .table tr,
+    :root[data-view="table"] .table td{ display:block; width:100%; }
+    :root[data-view="table"] .table thead{ display:none; }
+    :root[data-view="table"] .table tbody tr{
+        position:relative;
+        background:var(--surface);
+        border:1px solid var(--border);
+        border-radius:var(--r-lg);
+        padding:var(--s4);
+        margin-bottom:var(--s3);
+    }
+    :root[data-view="table"] .table tbody tr:hover{ background:var(--surface); }
+    :root[data-view="table"] .table tbody td{
+        display:grid; grid-template-columns:112px minmax(0,1fr);
+        align-items:baseline; gap:var(--s3);
+        padding:5px 0; border-bottom:none; font-size:13px;
+    }
+    :root[data-view="table"] .table tbody td:first-child,
+    :root[data-view="table"] .table tbody td:last-child{ padding-left:0; padding-right:0; }
+    /* label kolom dimunculkan dari data-label */
+    :root[data-view="table"] .table tbody td::before{
+        content:attr(data-label);
+        font-size:12.5px; font-weight:400; color:var(--text-muted);
+    }
+    /* thumbnail + nama menjadi kepala kartu.
+       Selektor disamakan bobotnya dengan `.table tbody td` (0,1,2) — kalau hanya
+       ditulis `.cell-thumb` (0,1,0) aturan grid di atas yang menang. */
+    :root[data-view="table"] .table tbody td.cell-thumb{ display:block; margin-bottom:var(--s3); }
+    :root[data-view="table"] .table tbody td.cell-thumb::before{ content:none; }
+    :root[data-view="table"] .cell-thumb .thumb{ width:100%; height:150px; }
+    :root[data-view="table"] .table tbody td.cell-name{
+        display:block; margin-bottom:var(--s3); padding-bottom:var(--s3);
+        border-bottom:1px solid var(--border);
+    }
+    :root[data-view="table"] .table tbody td.cell-name::before{ content:none; }
+    :root[data-view="table"] .cell-name strong{ font-size:16px; }
+    /* di kartu mobile ruang cukup: tampilkan nama kategori lengkap */
+    :root[data-view="table"] .kat{ display:none; }
+    :root[data-view="table"] .kat-full{ display:inline; }
+    /* semua kolom yang disembunyikan di tablet dimunculkan lagi di kartu */
+    :root[data-view="table"] .table tbody td.cell-kat,
+    :root[data-view="table"] .table tbody td.cell-updated,
+    :root[data-view="table"] .table tbody td.cell-year,
+    :root[data-view="table"] .table tbody td.cell-cond{ display:grid; }
+    :root[data-view="table"] .table tbody td.cell-actions{
+        display:block; margin-top:var(--s4); padding-top:var(--s4);
+        border-top:1px solid var(--border);
+    }
+    :root[data-view="table"] .table tbody td.cell-actions::before{ content:none; }
+    :root[data-view="table"] .actions{ justify-content:flex-start; }
+    :root[data-view="table"] .icon-btn{ width:auto; flex:1 1 0; height:38px; gap:7px; font-size:13px; }
+    :root[data-view="table"] .icon-btn .icon-btn__label{ display:inline; }
+
+    .table-footer{ padding:var(--s4) 0 0; border-top:none; justify-content:center; }
+    /* label prev/next disembunyikan agar deretan halaman muat di layar sempit */
+    .page-btn__label{ display:none; }
+    .modal{ padding:var(--s4); }
+    .form-grid{ grid-template-columns:minmax(0,1fr); }
+}
+.icon-btn__label{ display:none; }
+
+@media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
+@media print{
+    .navbar,.toolbar,.cell-actions,.col-act,.table-footer{ display:none !important; }
+    .panel{ border:none; }
+    .table tbody tr{ break-inside:avoid; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================== NAVBAR ==
+     Struktur & tautan identik dengan navbar.php agar bisa langsung
+     ditukar dengan include layout proyek.
+     ====================================================================== -->
+<nav class="navbar">
+    <div class="shell navbar__inner">
+        <a class="navbar__brand" href="/mainpage">
+            <img src="https://manajemenaset.idampalada.com/assets/images/logoPU.png" alt="Kementerian Pekerjaan Umum">
+        </a>
+
+        <ul class="navbar__nav">
+            <li><a class="navbar__link" href="/mainpage">Home</a></li>
+            <li><a class="navbar__link" href="/user/barang">Barang</a></li>
+            <li><a class="navbar__link" href="/user/scan">Scan</a></li>
+            <li><a class="navbar__link" href="/homepage" aria-current="page">Kendaraan</a></li>
+            <li><a class="navbar__link" href="/user/ruangan">Ruangan</a></li>
+            <li><a class="navbar__link" href="/user/profile">Profile</a></li>
+            <li><a class="navbar__link" href="/logout">Logout</a></li>
+            <li aria-hidden="true"><span class="navbar__divider"></span></li>
+            <li>
+                <a class="navbar__user" href="/user/profile">
+                    <span class="navbar__avatar">RA</span> raka
+                </a>
+            </li>
+        </ul>
+
+        <button class="navbar__toggle" type="button" aria-label="Buka menu">
+            <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
+    </div>
+</nav>
+
+<main class="page">
+<div class="shell">
+
+    <!-- ====================================================== PAGE HEADER == -->
+    <nav aria-label="Breadcrumb">
+        <ol class="breadcrumb">
+            <li><a href="/mainpage">Beranda</a></li>
+            <li class="breadcrumb__sep" aria-hidden="true">/</li>
+            <li><a href="/admin">Administrasi</a></li>
+            <li class="breadcrumb__sep" aria-hidden="true">/</li>
+            <li aria-current="page">Kendaraan</li>
+        </ol>
+    </nav>
+
+    <header class="page-header">
+        <div>
+            <h1 class="page-title">Kendaraan</h1>
+            <p class="page-subtitle">Kelola seluruh data kendaraan dinas.</p>
+        </div>
+
+        <div class="summary-block">
+        <dl class="summary">
+            <div class="summary__item">
+                <dt>Total armada</dt>
+                <dd class="tabnum">234</dd>
+            </div>
+            <div class="summary__item">
+                <dt><span class="dot dot--green"></span>Tersedia</dt>
+                <dd class="tabnum">186</dd>
+            </div>
+            <div class="summary__item">
+                <dt><span class="dot dot--blue"></span>Dipinjam</dt>
+                <dd class="tabnum">34</dd>
+            </div>
+            <div class="summary__item">
+                <dt><span class="dot dot--amber"></span>Dalam verifikasi</dt>
+                <dd class="tabnum">9</dd>
+            </div>
+        </dl>
+        <p class="summary__meta">
+            <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+            Diperbarui <time datetime="2026-07-20T09:15">20 Jul 2026, 09.15 WIB</time>
+            <span class="summary__sep" aria-hidden="true">&middot;</span>
+            <span class="summary__delta">+6 unit bulan ini</span>
+        </p>
+        </div>
+    </header>
+
+    <!-- ========================================================== TOOLBAR == -->
+    <form class="toolbar" role="search" onsubmit="return false">
+        <div class="field field--search">
+            <label class="field__label" for="q">Cari kendaraan</label>
+            <div class="search">
+                <i class="bi bi-search" aria-hidden="true"></i>
+                <input class="input" type="search" id="q" name="q" autocomplete="off"
+                       placeholder="Cari nama, no. polisi, atau kode barang...">
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="field__label" for="kategori">Kategori</label>
+            <select class="select" id="kategori" name="kategori">
+                <option value="">Semua Kategori</option>
+                <option value="KDJ">Kendaraan Dinamis Jalan</option>
+                <option value="KDO">Kendaraan Dinamis Off-road</option>
+                <option value="KDF">Kendaraan Dinamis Fasilitas</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label class="field__label" for="status">Status</label>
+            <select class="select" id="status" name="status">
+                <option value="">Semua Status</option>
+                <option value="tersedia">Tersedia</option>
+                <option value="dipinjam">Dipinjam</option>
+                <option value="verifikasi">Dalam Verifikasi</option>
+                <option value="perbaikan">Perbaikan</option>
+            </select>
+        </div>
+
+        <div class="field field--action">
+            <span class="field__label" id="viewSwitchLabel">Tampilan</span>
+            <div class="action-row">
+                <div class="view-switch" role="group" aria-labelledby="viewSwitchLabel">
+                    <button class="view-switch__btn" type="button"
+                            data-view-btn="grid" aria-pressed="false" title="Tampilan kartu">
+                        <i class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i> Kartu
+                    </button>
+                    <button class="view-switch__btn" type="button"
+                            data-view-btn="table" aria-pressed="true" title="Tampilan tabel">
+                        <i class="bi bi-list-ul" aria-hidden="true"></i> Tabel
+                    </button>
+                </div>
+                <button class="btn btn--primary btn--tall" type="button" data-modal-open="modalTambah">
+                    <i class="bi bi-plus-lg" aria-hidden="true"></i> Tambah Kendaraan
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <!-- ======================================================= DATA TABLE == -->
+    <section class="panel" aria-label="Daftar kendaraan">
+        <table class="table">
+            <caption class="visually-hidden">Daftar kendaraan dinas beserta status, kondisi, dan aksi pengelolaan</caption>
+            <thead>
+                <tr>
+                    <th class="col-thumb" scope="col"><span class="visually-hidden">Foto</span></th>
+                    <th class="col-name"    scope="col">Nama Kendaraan</th>
+                    <th class="col-plate"   scope="col">No. Polisi</th>
+                    <th class="col-kat"     scope="col">Kategori</th>
+                    <th class="col-year"    scope="col">Tahun</th>
+                    <th class="col-status"  scope="col">Status</th>
+                    <th class="col-cond"    scope="col">Kondisi</th>
+                    <th class="col-updated" scope="col">Terakhir Update</th>
+                    <th class="col-act"     scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1759826516_626e4e421e7df04280f7.jpg" alt="Hiace" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Hiace</strong><span>Kode A01 &middot; 7 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 1234 S</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Fasilitas">KDF</span><span class="kat-full">Kendaraan Dinamis Fasilitas</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2020</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--green">Tersedia</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">12 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Hiace"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Hiace" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Hiace"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Hiace" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1759826619_f85863896c9d01522767.jpg" alt="Medium Bus" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Medium Bus</strong><span>Kode 10012345 &middot; 8 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 7306 SPA</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Jalan">KDJ</span><span class="kat-full">Kendaraan Dinamis Jalan</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2018</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--green">Tersedia</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">11 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Medium Bus"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Medium Bus" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Medium Bus"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Medium Bus" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1744076379_24851240572c5a9f0adc.jpg" alt="Mitsubishi Fuso" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Mitsubishi Fuso</strong><span>Kode 20012345 &middot; 3 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 3987 PIS</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Off-road">KDO</span><span class="kat-full">Kendaraan Dinamis Off-road</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2012</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--red">Perbaikan</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--red">Rusak Ringan</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">09 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Mitsubishi Fuso"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Mitsubishi Fuso" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Mitsubishi Fuso"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Mitsubishi Fuso" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1744076520_4623bc52dc50867aa202.jpg" alt="Ambulance" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Ambulance</strong><span>Kode 30012345 &middot; 7 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 1111 BBH</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Fasilitas">KDF</span><span class="kat-full">Kendaraan Dinamis Fasilitas</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2015</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--green">Tersedia</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">08 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Ambulance"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Ambulance" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Ambulance"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Ambulance" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1744185772_a834a8ca6269fba2cea4.jpg" alt="IONIQ 5" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>IONIQ 5</strong><span>Kode 4001234 &middot; 6 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 1212 ONQ</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Jalan">KDJ</span><span class="kat-full">Kendaraan Dinamis Jalan</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2022</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--blue">Dipinjam</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">07 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail IONIQ 5"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit IONIQ 5" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat IONIQ 5"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus IONIQ 5" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1744186159_47afac342ca8d748d32e.jpg" alt="Toyota Camry" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Toyota Camry</strong><span>Kode 3782781 &middot; 5 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 2576 SNV</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Jalan">KDJ</span><span class="kat-full">Kendaraan Dinamis Jalan</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2024</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--green">Tersedia</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">06 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Toyota Camry"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Toyota Camry" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Toyota Camry"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Toyota Camry" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1744336169_823176cb3023f9c2b31e.jpg" alt="Mitsubishi Xpander" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Mitsubishi Xpander</strong><span>Kode 37827832 &middot; 7 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 3728 SNC</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Jalan">KDJ</span><span class="kat-full">Kendaraan Dinamis Jalan</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2018</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--green">Tersedia</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--amber">Perlu Perawatan</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">04 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Mitsubishi Xpander"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Mitsubishi Xpander" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Mitsubishi Xpander"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Mitsubishi Xpander" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1745200320_249b37dc943cfadbe139.jpeg" alt="Toyota Hiace" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Toyota Hiace</strong><span>Kode 600123 &middot; 25 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 7415 SPA</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Fasilitas">KDF</span><span class="kat-full">Kendaraan Dinamis Fasilitas</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2016</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--green">Tersedia</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">02 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Toyota Hiace B 7415 SPA"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Toyota Hiace B 7415 SPA" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Toyota Hiace B 7415 SPA"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Toyota Hiace B 7415 SPA" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/1745204984_2c3f72bfe54d55a5caac.jpeg" alt="Toyota Hiace" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Toyota Hiace</strong><span>Kode 8003293 &middot; 8 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 7417 SPA</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Off-road">KDO</span><span class="kat-full">Kendaraan Dinamis Off-road</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2018</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--amber">Dalam Verifikasi</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">01 Jul 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Toyota Hiace B 7417 SPA"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Toyota Hiace B 7417 SPA" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Toyota Hiace B 7417 SPA"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Toyota Hiace B 7417 SPA" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="cell-thumb"><img class="thumb" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1752205361_6870883186b46.jpeg" alt="Fortuner" loading="lazy"></td>
+                    <td class="cell-name" data-label="Nama"><strong>Fortuner</strong><span>Kode 76887 &middot; 8 orang</span></td>
+                    <td class="cell-plate" data-label="No. Polisi"><span class="plate tabnum">B 2025 SMC</span></td>
+                    <td class="cell-kat" data-label="Kategori"><span class="kat" title="Kendaraan Dinamis Fasilitas">KDF</span><span class="kat-full">Kendaraan Dinamis Fasilitas</span></td>
+                    <td class="cell-year tabnum" data-label="Tahun">2020</td>
+                    <td class="cell-status" data-label="Status"><span class="badge badge--blue">Dipinjam</span></td>
+                    <td class="cell-cond" data-label="Kondisi"><span class="badge badge--quiet badge--green">Baik</span></td>
+                    <td class="cell-updated muted tabnum" data-label="Terakhir update">28 Jun 2026</td>
+                    <td class="cell-actions" data-label="Aksi">
+                        <div class="actions">
+                            <button class="icon-btn" type="button" title="Lihat Detail" aria-label="Detail Fortuner"><i class="bi bi-eye" aria-hidden="true"></i><span class="icon-btn__label">Detail</span></button>
+                            <button class="icon-btn" type="button" title="Edit" aria-label="Edit Fortuner" data-modal-open="modalEdit"><i class="bi bi-pencil" aria-hidden="true"></i><span class="icon-btn__label">Edit</span></button>
+                            <button class="icon-btn" type="button" title="Riwayat Peminjaman" aria-label="Riwayat Fortuner"><i class="bi bi-clock-history" aria-hidden="true"></i><span class="icon-btn__label">Riwayat</span></button>
+                            <button class="icon-btn icon-btn--danger" type="button" title="Hapus" aria-label="Hapus Fortuner" data-modal-open="modalHapus"><i class="bi bi-trash" aria-hidden="true"></i><span class="icon-btn__label">Hapus</span></button>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <!-- ==================================================== PAGINATION == -->
+        <div class="table-footer">
+            <p class="table-footer__count">
+                Menampilkan <strong class="tabnum">1&ndash;10</strong> dari <strong class="tabnum">234</strong> kendaraan
+            </p>
+
+            <nav aria-label="Navigasi halaman">
+                <ul class="pagination">
+                    <li><span class="page-btn" aria-disabled="true"><i class="bi bi-chevron-left" aria-hidden="true"></i><span class="page-btn__label">Sebelumnya</span></span></li>
+                    <li><a class="page-btn" href="#" aria-current="page">1</a></li>
+                    <li><a class="page-btn" href="#">2</a></li>
+                    <li><a class="page-btn" href="#">3</a></li>
+                    <li aria-hidden="true"><span class="page-ellipsis">&hellip;</span></li>
+                    <li><a class="page-btn" href="#">24</a></li>
+                    <li><a class="page-btn" href="#"><span class="page-btn__label">Berikutnya</span><i class="bi bi-chevron-right" aria-hidden="true"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- ====================================================== EMPTY STATE ==
+         Tampilkan panel ini (dan sembunyikan .panel di atas) ketika hasil
+         filter kosong. Hapus atribut `hidden` untuk melihat pratinjau.
+         ==================================================================== -->
+    <section class="panel empty" id="emptyState" hidden>
+        <svg class="empty__art" width="72" height="72" viewBox="0 0 72 72" fill="none"
+             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="8" y="20" width="56" height="34" rx="4"/>
+            <path d="M8 30h56"/>
+            <path d="M18 20v-4M54 20v-4"/>
+            <path d="M20 42h12M20 48h20"/>
+            <circle cx="52" cy="45" r="8"/>
+            <path d="m58 51 6 6"/>
+        </svg>
+        <h2 class="empty__title">Tidak ada kendaraan ditemukan</h2>
+        <p class="empty__text">
+            Tidak ada data yang cocok dengan kata kunci atau filter yang dipilih.
+            Ubah kriteria pencarian, atau tambahkan kendaraan baru ke dalam daftar aset.
+        </p>
+        <div class="empty__actions">
+            <button class="btn btn--secondary" type="button" data-filter-reset>
+                <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Reset Filter
+            </button>
+            <button class="btn btn--primary" type="button" data-modal-open="modalTambah">
+                <i class="bi bi-plus-lg" aria-hidden="true"></i> Tambah Kendaraan
+            </button>
+        </div>
+    </section>
+
+</div>
+</main>
+
+
+<!-- ==========================================================================
+     MODAL — markup saja, belum ada JavaScript.
+     Untuk pratinjau: hapus atribut `hidden` pada elemen .modal yang dituju.
+     Saat menyambungkan JS nanti, tombol pemicu sudah menyimpan target di
+     atribut `data-modal-open`, dan tombol penutup di `data-modal-close`.
+     ========================================================================== -->
+
+<!-- ---------------------------------------------------- Tambah kendaraan -->
+<div class="modal" id="modalTambah" role="dialog" aria-modal="true" aria-labelledby="modalTambahTitle" hidden>
+    <div class="modal__dialog">
+        <div class="modal__header">
+            <div>
+                <h2 class="modal__title" id="modalTambahTitle">Tambah Kendaraan</h2>
+                <p class="modal__desc">Lengkapi data kendaraan dinas yang akan didaftarkan.</p>
+            </div>
+            <button class="modal__close" type="button" aria-label="Tutup" data-modal-close>
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div class="modal__body">
+            <form class="form-grid" id="formTambah">
+                <div class="field">
+                    <label class="field__label" for="t-nama">Nama Kendaraan</label>
+                    <input class="input" type="text" id="t-nama" name="nama" placeholder="Contoh: Toyota Hiace">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="t-nopol">No. Polisi</label>
+                    <input class="input" type="text" id="t-nopol" name="no_polisi" placeholder="B 1234 SPA">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="t-kategori">Kategori</label>
+                    <select class="select" id="t-kategori" name="kategori">
+                        <option value="">Pilih kategori</option>
+                        <option value="KDJ">Kendaraan Dinamis Jalan</option>
+                        <option value="KDO">Kendaraan Dinamis Off-road</option>
+                        <option value="KDF">Kendaraan Dinamis Fasilitas</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="t-tahun">Tahun Pembuatan</label>
+                    <input class="input tabnum" type="number" id="t-tahun" name="tahun" placeholder="2024" min="1950" max="2100">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="t-kode">Kode Barang</label>
+                    <input class="input tabnum" type="text" id="t-kode" name="kode_barang" placeholder="10012345">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="t-kapasitas">Kapasitas</label>
+                    <input class="input" type="text" id="t-kapasitas" name="kapasitas" placeholder="8 orang">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="t-warna">Warna</label>
+                    <input class="input" type="text" id="t-warna" name="warna" placeholder="Putih">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="t-kondisi">Kondisi</label>
+                    <select class="select" id="t-kondisi" name="kondisi">
+                        <option value="baik">Baik</option>
+                        <option value="perawatan">Perlu perawatan</option>
+                        <option value="rusak">Rusak</option>
+                    </select>
+                </div>
+                <div class="field field--full">
+                    <label class="field__label" for="t-foto">Foto Kendaraan</label>
+                    <label class="file-drop" for="t-foto">
+                        <i class="bi bi-image" aria-hidden="true"></i>
+                        <span>Klik untuk memilih berkas, atau seret gambar ke sini</span>
+                        <span class="field__hint">Format JPG atau PNG, maksimal 2 MB per berkas.</span>
+                    </label>
+                    <input type="file" id="t-foto" name="foto[]" accept="image/*" multiple class="visually-hidden">
+                </div>
+            </form>
+        </div>
+
+        <div class="modal__footer">
+            <button class="btn btn--secondary" type="button" data-modal-close>Batal</button>
+            <button class="btn btn--primary" type="submit" form="formTambah">Simpan Kendaraan</button>
+        </div>
+    </div>
+</div>
+
+<!-- ------------------------------------------------------ Edit kendaraan -->
+<div class="modal" id="modalEdit" role="dialog" aria-modal="true" aria-labelledby="modalEditTitle" hidden>
+    <div class="modal__dialog">
+        <div class="modal__header">
+            <div>
+                <h2 class="modal__title" id="modalEditTitle">Edit Kendaraan</h2>
+                <p class="modal__desc">Perbarui data kendaraan dinas yang dipilih.</p>
+            </div>
+            <button class="modal__close" type="button" aria-label="Tutup" data-modal-close>
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div class="modal__body">
+            <form class="form-grid" id="formEdit">
+                <input type="hidden" name="id" value="">
+                <div class="field">
+                    <label class="field__label" for="e-nama">Nama Kendaraan</label>
+                    <input class="input" type="text" id="e-nama" name="nama" value="Hiace">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="e-nopol">No. Polisi</label>
+                    <input class="input" type="text" id="e-nopol" name="no_polisi" value="B 1234 S">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="e-kategori">Kategori</label>
+                    <select class="select" id="e-kategori" name="kategori">
+                        <option value="KDJ">Kendaraan Dinamis Jalan</option>
+                        <option value="KDO">Kendaraan Dinamis Off-road</option>
+                        <option value="KDF" selected>Kendaraan Dinamis Fasilitas</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="e-tahun">Tahun Pembuatan</label>
+                    <input class="input tabnum" type="number" id="e-tahun" name="tahun" value="2020" min="1950" max="2100">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="e-kode">Kode Barang</label>
+                    <input class="input tabnum" type="text" id="e-kode" name="kode_barang" value="A01">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="e-kapasitas">Kapasitas</label>
+                    <input class="input" type="text" id="e-kapasitas" name="kapasitas" value="7 orang">
+                </div>
+                <div class="field">
+                    <label class="field__label" for="e-status">Status</label>
+                    <select class="select" id="e-status" name="status">
+                        <option value="tersedia" selected>Tersedia</option>
+                        <option value="dipinjam">Dipinjam</option>
+                        <option value="verifikasi">Dalam Verifikasi</option>
+                        <option value="perbaikan">Perbaikan</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="field__label" for="e-kondisi">Kondisi</label>
+                    <select class="select" id="e-kondisi" name="kondisi">
+                        <option value="baik" selected>Baik</option>
+                        <option value="perawatan">Perlu perawatan</option>
+                        <option value="rusak">Rusak</option>
+                    </select>
+                </div>
+                <div class="field field--full">
+                    <label class="field__label" for="e-foto">Ganti Foto</label>
+                    <label class="file-drop" for="e-foto">
+                        <i class="bi bi-image" aria-hidden="true"></i>
+                        <span>Klik untuk mengganti foto kendaraan</span>
+                        <span class="field__hint">Biarkan kosong bila foto tidak diubah.</span>
+                    </label>
+                    <input type="file" id="e-foto" name="foto[]" accept="image/*" multiple class="visually-hidden">
+                </div>
+            </form>
+        </div>
+
+        <div class="modal__footer">
+            <button class="btn btn--secondary" type="button" data-modal-close>Batal</button>
+            <button class="btn btn--primary" type="submit" form="formEdit">Simpan Perubahan</button>
+        </div>
+    </div>
+</div>
+
+<!-- --------------------------------------------------- Konfirmasi hapus -->
+<div class="modal" id="modalHapus" role="alertdialog" aria-modal="true" aria-labelledby="modalHapusTitle" hidden>
+    <div class="modal__dialog modal__dialog--sm">
+        <div class="modal__body">
+            <div class="confirm">
+                <div class="confirm__icon"><i class="bi bi-exclamation-triangle" aria-hidden="true"></i></div>
+                <div>
+                    <h2 class="modal__title" id="modalHapusTitle">Hapus kendaraan?</h2>
+                    <p class="confirm__text" style="margin-top:6px">
+                        Data <strong>Hiace &middot; B 1234 S</strong> akan dihapus dari daftar aset.
+                        Riwayat peminjaman yang terkait tetap tersimpan. Tindakan ini tidak dapat dibatalkan.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal__footer">
+            <button class="btn btn--secondary" type="button" data-modal-close>Batal</button>
+            <button class="btn btn--danger" type="button">Hapus Kendaraan</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ===========================================================================
+   Pengalih mode tampilan
+   - Pilihan disimpan di localStorage; mode tabel adalah default.
+   - Markup tabel dipakai ulang untuk kedua mode (satu sumber data), sehingga
+     peran ARIA perlu ditukar: tabel asli <-> daftar kartu.
+   =========================================================================== */
+(function () {
+    var KEY = 'simanset.admin.kendaraan.view';
+    var root = document.documentElement;
+    var buttons = document.querySelectorAll('[data-view-btn]');
+    var table = document.querySelector('.panel .table');
+    if (!table || !buttons.length) return;
+
+    var tbody = table.tBodies[0];
+
+    function applySemantics(grid) {
+        var rows = tbody.rows, i, j, cells;
+        if (grid) {
+            table.setAttribute('role', 'presentation');
+            tbody.setAttribute('role', 'list');
+        } else {
+            table.removeAttribute('role');
+            tbody.removeAttribute('role');
+        }
+        for (i = 0; i < rows.length; i++) {
+            if (grid) { rows[i].setAttribute('role', 'listitem'); }
+            else { rows[i].removeAttribute('role'); }
+            cells = rows[i].cells;
+            for (j = 0; j < cells.length; j++) {
+                if (grid) { cells[j].setAttribute('role', 'presentation'); }
+                else { cells[j].removeAttribute('role'); }
+            }
+        }
+    }
+
+    function apply(view) {
+        view = view === 'grid' ? 'grid' : 'table';
+        root.setAttribute('data-view', view);
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].setAttribute('aria-pressed',
+                buttons[i].getAttribute('data-view-btn') === view ? 'true' : 'false');
+        }
+        applySemantics(view === 'grid');
+    }
+
+    /* skrip di <head> sudah memulihkan mode sebelum render; di sini tinggal
+       menyelaraskan tombol dan peran ARIA dengan keadaan tersebut. */
+    apply(root.getAttribute('data-view'));
+
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function () {
+            var view = this.getAttribute('data-view-btn');
+            apply(view);
+            try { localStorage.setItem(KEY, view); } catch (e) {}
+        });
+    }
+})();
+</script>
+
+</body>
+</html>
