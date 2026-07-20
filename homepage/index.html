@@ -1,0 +1,3382 @@
+<!-- DEBUG-VIEW START 4 APPPATH\Views\user\homepage.php -->
+<!-- DEBUG-VIEW START 3 APPPATH\Views\admin\layouts\app.php -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script  id="debugbar_loader" data-time="1784515379.568391" src="https://manajemenaset.idampalada.com/?debugbar"></script><script  id="debugbar_dynamic_script"></script><style  id="debugbar_dynamic_style"></style><script class="kint-rich-script">void 0===window.kintShared&&(window.kintShared=function(){"use strict";var e={dedupe:function(e,n){return[].forEach.call(document.querySelectorAll(e),function(e){e!==(n=n&&n.ownerDocument.contains(n)?n:e)&&e.parentNode.removeChild(e)}),n},runOnce:function(e){"complete"===document.readyState?e():window.addEventListener("load",e)}};return window.addEventListener("click",function(e){var n;e.target.classList.contains("kint-ide-link")&&((n=new XMLHttpRequest).open("GET",e.target.href),n.send(null),e.preventDefault())}),e}());
+void 0===window.kintRich&&(window.kintRich=function(){"use strict";var l={selectText:function(e){var t=window.getSelection(),a=document.createRange();a.selectNodeContents(e),t.removeAllRanges(),t.addRange(a)},toggle:function(e,t){var a=l.getChildren(e);a&&(e.classList.toggle("kint-show",t),1===a.childNodes.length)&&(a=a.childNodes[0].childNodes[0])&&a.classList&&a.classList.contains("kint-parent")&&l.toggle(a,t)},toggleChildren:function(e,t){var a=l.getChildren(e);if(a){var o=a.getElementsByClassName("kint-parent"),s=o.length;for(void 0===t&&(t=e.classList.contains("kint-show"));s--;)l.toggle(o[s],t)}},switchTab:function(e){var t=e.previousSibling,a=0;for(e.parentNode.getElementsByClassName("kint-active-tab")[0].classList.remove("kint-active-tab"),e.classList.add("kint-active-tab");t;)1===t.nodeType&&a++,t=t.previousSibling;for(var o=e.parentNode.nextSibling.childNodes,s=0;s<o.length;s++)s===a?(o[s].classList.add("kint-show"),1===o[s].childNodes.length&&(t=o[s].childNodes[0].childNodes[0])&&t.classList&&t.classList.contains("kint-parent")&&l.toggle(t,!0)):o[s].classList.remove("kint-show")},mktag:function(e){return"<"+e+">"},openInNewWindow:function(e){var t=window.open();t&&(t.document.open(),t.document.write(l.mktag("html")+l.mktag("head")+l.mktag("title")+"Kint ("+(new Date).toISOString()+")"+l.mktag("/title")+l.mktag('meta charset="utf-8"')+l.mktag('script class="kint-rich-script" nonce="'+l.script.nonce+'"')+l.script.innerHTML+l.mktag("/script")+l.mktag('style class="kint-rich-style" nonce="'+l.style.nonce+'"')+l.style.innerHTML+l.mktag("/style")+l.mktag("/head")+l.mktag("body")+'<input class="kint-note-input" placeholder="Take some notes!"><div class="kint-rich">'+e.parentNode.outerHTML+"</div>"+l.mktag("/body")),t.document.close())},sortTable:function(e,a){var t=e.tBodies[0];[].slice.call(e.tBodies[0].rows).sort(function(e,t){if(e=e.cells[a].textContent.trim().toLocaleLowerCase(),t=t.cells[a].textContent.trim().toLocaleLowerCase(),isNaN(e)||isNaN(t)){if(isNaN(e)&&!isNaN(t))return 1;if(isNaN(t)&&!isNaN(e))return-1}else e=parseFloat(e),t=parseFloat(t);return e<t?-1:t<e?1:0}).forEach(function(e){t.appendChild(e)})},showAccessPath:function(e){for(var t=e.childNodes,a=0;a<t.length;a++)if(t[a].classList&&t[a].classList.contains("access-path"))return t[a].classList.toggle("kint-show"),void(t[a].classList.contains("kint-show")&&l.selectText(t[a]))},showSearchBox:function(e){var t=e.querySelector(".kint-search");t&&(t.classList.toggle("kint-show"),t.classList.contains("kint-show")?(e.classList.add("kint-show"),t.focus(),t.select(),l.search(e.parentNode,t.value)):e.parentNode.classList.remove("kint-search-root"))},search:function(e,t){e.querySelectorAll(".kint-search-match").forEach(function(e){e.classList.remove("kint-search-match")}),e.classList.remove("kint-search-match"),e.classList.toggle("kint-search-root",t.length),t.length&&l.findMatches(e,t)},findMatches:function(e,t){var a,o,s,n=e.cloneNode(!0);if(n.querySelectorAll(".access-path").forEach(function(e){e.remove()}),-1!=n.textContent.toUpperCase().indexOf(t.toUpperCase())){for(r in e.classList.add("kint-search-match"),e.childNodes)if("DD"==e.childNodes[r].tagName){a=e.childNodes[r];break}if(a)if([].forEach.call(a.childNodes,function(e){"DL"==e.tagName?l.findMatches(e,t):"UL"==e.tagName&&(e.classList.contains("kint-tabs")?o=e.childNodes:e.classList.contains("kint-tab-contents")&&(s=e.childNodes))}),o&&s&&o.length==s.length)for(var r=0;r<o.length;r++){var i=!1;(i=-1!=o[r].textContent.toUpperCase().indexOf(t.toUpperCase())||((n=s[r].cloneNode(!0)).querySelectorAll(".access-path").forEach(function(e){e.remove()}),-1!=n.textContent.toUpperCase().indexOf(t.toUpperCase()))?!0:i)&&(o[r].classList.add("kint-search-match"),[].forEach.call(s[r].childNodes,function(e){"DL"==e.tagName&&l.findMatches(e,t)}))}}},getParentByClass:function(e,t){for(;;){if(!(e=e.parentNode)||!e.classList||e===document)return null;if(e.classList.contains(t))return e}return null},getParentHeader:function(e,t){for(var a=e.nodeName.toLowerCase();"dd"!==a&&"dt"!==a&&l.getParentByClass(e,"kint-rich");)a=(e=e.parentNode).nodeName.toLowerCase();return l.getParentByClass(e,"kint-rich")?(e="dd"===a&&t?e.previousElementSibling:e)&&"dt"===e.nodeName.toLowerCase()&&e.classList.contains("kint-parent")?e:void 0:null},getChildren:function(e){for(;(e=e.nextElementSibling)&&"dd"!==e.nodeName.toLowerCase(););return e},isFolderOpen:function(){if(l.folder&&l.folder.querySelector("dd.kint-foldout"))return l.folder.querySelector("dd.kint-foldout").previousSibling.classList.contains("kint-show")},initLoad:function(){l.style=window.kintShared.dedupe("style.kint-rich-style",l.style),l.script=window.kintShared.dedupe("script.kint-rich-script",l.script),l.folder=window.kintShared.dedupe(".kint-rich.kint-folder",l.folder);var t,e=document.querySelectorAll("input.kint-search");[].forEach.call(e,function(t){function e(e){window.clearTimeout(a),t.value!==o&&(a=window.setTimeout(function(){o=t.value,l.search(t.parentNode.parentNode,o)},500))}var a=null,o=null;t.removeEventListener("keyup",e),t.addEventListener("keyup",e)}),l.folder&&(t=l.folder.querySelector("dd"),[].forEach.call(document.querySelectorAll(".kint-rich.kint-file"),function(e){e.parentNode!==l.folder&&t.appendChild(e)}),document.body.appendChild(l.folder),l.folder.classList.add("kint-show"))},keyboardNav:{targets:[],target:0,active:!1,fetchTargets:function(){var e=l.keyboardNav.targets[l.keyboardNav.target];l.keyboardNav.targets=[],document.querySelectorAll(".kint-rich nav, .kint-tabs>li:not(.kint-active-tab)").forEach(function(e){l.isFolderOpen()&&!l.folder.contains(e)||0===e.offsetWidth&&0===e.offsetHeight||l.keyboardNav.targets.push(e)}),e&&-1!==l.keyboardNav.targets.indexOf(e)&&(l.keyboardNav.target=l.keyboardNav.targets.indexOf(e))},sync:function(e){var t=document.querySelector(".kint-focused");t&&t.classList.remove("kint-focused"),l.keyboardNav.active&&((t=l.keyboardNav.targets[l.keyboardNav.target]).classList.add("kint-focused"),e||l.keyboardNav.scroll(t))},scroll:function(e){var t,a;l.folder&&e===l.folder.querySelector("dt > nav")||(e=(t=function(e){return e.offsetTop+(e.offsetParent?t(e.offsetParent):0)})(e),l.isFolderOpen()?(a=l.folder.querySelector("dd.kint-foldout")).scrollTo(0,e-a.clientHeight/2):window.scrollTo(0,e-window.innerHeight/2))},moveCursor:function(e){for(l.keyboardNav.target+=e;l.keyboardNav.target<0;)l.keyboardNav.target+=l.keyboardNav.targets.length;for(;l.keyboardNav.target>=l.keyboardNav.targets.length;)l.keyboardNav.target-=l.keyboardNav.targets.length;l.keyboardNav.sync()},setCursor:function(e){if(!l.isFolderOpen()||l.folder.contains(e)){l.keyboardNav.fetchTargets();for(var t=0;t<l.keyboardNav.targets.length;t++)if(e===l.keyboardNav.targets[t])return l.keyboardNav.target=t,!0}return!1}},mouseNav:{lastClickTarget:null,lastClickTimer:null,lastClickCount:0,renewLastClick:function(){window.clearTimeout(l.mouseNav.lastClickTimer),l.mouseNav.lastClickTimer=window.setTimeout(function(){l.mouseNav.lastClickTarget=null,l.mouseNav.lastClickTimer=null,l.mouseNav.lastClickCount=0},250)}},style:null,script:null,folder:null};return window.addEventListener("click",function(e){var t=e.target;if(l.mouseNav.lastClickTarget&&l.mouseNav.lastClickTimer&&l.mouseNav.lastClickCount)if(t=l.mouseNav.lastClickTarget,1===l.mouseNav.lastClickCount)l.toggleChildren(t.parentNode),l.keyboardNav.setCursor(t),l.keyboardNav.sync(!0),l.mouseNav.lastClickCount++,l.mouseNav.renewLastClick();else{for(var a=t.parentNode.classList.contains("kint-show"),o=document.getElementsByClassName("kint-parent"),s=o.length;s--;)l.toggle(o[s],a);l.keyboardNav.setCursor(t),l.keyboardNav.sync(!0),l.keyboardNav.scroll(t),window.clearTimeout(l.mouseNav.lastClickTimer),l.mouseNav.lastClickTarget=null,l.mouseNav.lastClickTarget=null,l.mouseNav.lastClickCount=0}else if(l.getParentByClass(t,"kint-rich")){var n=t.nodeName.toLowerCase();if("dfn"===n&&l.selectText(t),"th"===n)e.ctrlKey||l.sortTable(t.parentNode.parentNode.parentNode,t.cellIndex);else if((t=l.getParentHeader(t))&&(l.keyboardNav.setCursor(t.querySelector("nav")),l.keyboardNav.sync(!0)),t=e.target,"li"===n&&"kint-tabs"===t.parentNode.className)"kint-active-tab"!==t.className&&l.switchTab(t),(t=l.getParentHeader(t,!0))&&(l.keyboardNav.setCursor(t.querySelector("nav")),l.keyboardNav.sync(!0));else if("nav"===n)"footer"===t.parentNode.nodeName.toLowerCase()?(l.keyboardNav.setCursor(t),l.keyboardNav.sync(!0),(t=t.parentNode).classList.toggle("kint-show")):(l.toggle(t.parentNode),l.keyboardNav.fetchTargets(),l.mouseNav.lastClickCount=1,l.mouseNav.lastClickTarget=t,l.mouseNav.renewLastClick());else if(t.classList.contains("kint-popup-trigger")){var r=t.parentNode;if("footer"===r.nodeName.toLowerCase())r=r.previousSibling;else for(;r&&!r.classList.contains("kint-parent");)r=r.parentNode;l.openInNewWindow(r)}else t.classList.contains("kint-access-path-trigger")?l.showAccessPath(t.parentNode):t.classList.contains("kint-search-trigger")?l.showSearchBox(t.parentNode):t.classList.contains("kint-search")||("pre"===n&&3===e.detail?l.selectText(t):l.getParentByClass(t,"kint-source")&&3===e.detail?l.selectText(l.getParentByClass(t,"kint-source")):t.classList.contains("access-path")?l.selectText(t):"a"!==n&&(t=l.getParentHeader(t))&&(l.toggle(t),l.keyboardNav.fetchTargets()))}},!0),window.addEventListener("keydown",function(e){if(e.target===document.body&&!e.altKey&&!e.ctrlKey)if(68===e.keyCode){if(l.keyboardNav.active)l.keyboardNav.active=!1;else if(l.keyboardNav.active=!0,l.keyboardNav.fetchTargets(),0===l.keyboardNav.targets.length)return void(l.keyboardNav.active=!1);l.keyboardNav.sync(),e.preventDefault()}else if(l.keyboardNav.active)if(9===e.keyCode)l.keyboardNav.moveCursor(e.shiftKey?-1:1),e.preventDefault();else if(38===e.keyCode||75===e.keyCode)l.keyboardNav.moveCursor(-1),e.preventDefault();else if(40===e.keyCode||74===e.keyCode)l.keyboardNav.moveCursor(1),e.preventDefault();else{var t,a,o=l.keyboardNav.targets[l.keyboardNav.target];if("li"===o.nodeName.toLowerCase()){if(32===e.keyCode||13===e.keyCode)return l.switchTab(o),l.keyboardNav.fetchTargets(),l.keyboardNav.sync(),void e.preventDefault();if(39===e.keyCode||76===e.keyCode)return l.keyboardNav.moveCursor(1),void e.preventDefault();if(37===e.keyCode||72===e.keyCode)return l.keyboardNav.moveCursor(-1),void e.preventDefault()}o=o.parentNode,65===e.keyCode?(l.showAccessPath(o),e.preventDefault()):"footer"===o.nodeName.toLowerCase()&&o.parentNode.classList.contains("kint-rich")?32===e.keyCode||13===e.keyCode?(o.classList.toggle("kint-show"),e.preventDefault()):37===e.keyCode||72===e.keyCode?(o.classList.remove("kint-show"),e.preventDefault()):39!==e.keyCode&&76!==e.keyCode||(o.classList.add("kint-show"),e.preventDefault()):32===e.keyCode||13===e.keyCode?(l.toggle(o),l.keyboardNav.fetchTargets(),e.preventDefault()):39!==e.keyCode&&76!==e.keyCode&&37!==e.keyCode&&72!==e.keyCode||(t=39===e.keyCode||76===e.keyCode,o.classList.contains("kint-show")?l.toggleChildren(o,t):t||(a=l.getParentHeader(o.parentNode.parentNode,!0))&&(l.keyboardNav.setCursor((o=a).querySelector("nav")),l.keyboardNav.sync()),l.toggle(o,t),l.keyboardNav.fetchTargets(),e.preventDefault())}},!0),l}()),window.kintShared.runOnce(window.kintRich.initLoad);
+void 0===window.kintMicrotimeInitialized&&(window.kintMicrotimeInitialized=1,window.addEventListener("load",function(){"use strict";var a={},t=Array.prototype.slice.call(document.querySelectorAll("[data-kint-microtime-group]"),0);t.forEach(function(t){var i,e;t.querySelector(".kint-microtime-lap")&&(i=t.getAttribute("data-kint-microtime-group"),e=parseFloat(t.querySelector(".kint-microtime-lap").innerHTML),t=parseFloat(t.querySelector(".kint-microtime-avg").innerHTML),void 0===a[i]&&(a[i]={}),(void 0===a[i].min||a[i].min>e)&&(a[i].min=e),(void 0===a[i].max||a[i].max<e)&&(a[i].max=e),a[i].avg=t)}),t.forEach(function(t){var i,e,r,o,n=t.querySelector(".kint-microtime-lap");null!==n&&(i=parseFloat(n.textContent),o=t.dataset.kintMicrotimeGroup,e=a[o].avg,r=a[o].max,o=a[o].min,i!==(t.querySelector(".kint-microtime-avg").textContent=e)||i!==o||i!==r)&&(n.style.background=e<i?"hsl("+(40-40*((i-e)/(r-e)))+", 100%, 65%)":"hsl("+(40+80*(e===o?0:(e-i)/(e-o)))+", 100%, 65%)")})}));
+</script><style class="kint-rich-style">.kint-rich{font-size:13px;overflow-x:auto;white-space:nowrap;background:rgba(255,255,255,.9)}.kint-rich.kint-folder{position:fixed;bottom:0;left:0;right:0;z-index:999999;width:100%;margin:0;display:block}.kint-rich.kint-folder dd.kint-foldout{max-height:calc(100vh - 100px);padding-right:8px;overflow-y:scroll;display:none}.kint-rich.kint-folder dd.kint-foldout.kint-show{display:block}.kint-rich::selection,.kint-rich::-moz-selection,.kint-rich::-webkit-selection{background:#aaa;color:#1d1e1e}.kint-rich .kint-focused{box-shadow:0 0 3px 2px red}.kint-rich,.kint-rich::before,.kint-rich::after,.kint-rich *,.kint-rich *::before,.kint-rich *::after{box-sizing:border-box;border-radius:0;color:#1d1e1e;float:none !important;font-family:Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;line-height:15px;margin:0;padding:0;text-align:left}.kint-rich{margin:8px 0}.kint-rich dt,.kint-rich dl{width:auto}.kint-rich dt,.kint-rich div.access-path{background:#f8f8f8;border:1px solid #d7d7d7;color:#1d1e1e;display:block;font-weight:bold;list-style:none outside none;overflow:auto;padding:4px}.kint-rich dt:hover,.kint-rich div.access-path:hover{border-color:#aaa}.kint-rich>dl dl{padding:0 0 0 12px}.kint-rich dt.kint-parent>nav,.kint-rich>footer>nav{background:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAxNTAiPjxwYXRoIGQ9Ik02IDdoMThsLTkgMTV6bTAgMzBoMThsLTkgMTV6bTAgNDVoMThsLTktMTV6bTAgMzBoMThsLTktMTV6bTAgMTJsMTggMThtLTE4IDBsMTgtMTgiIGZpbGw9IiM1NTUiLz48cGF0aCBkPSJNNiAxMjZsMTggMThtLTE4IDBsMTgtMTgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjNTU1Ii8+PC9zdmc+") no-repeat scroll 0 0/15px 75px rgba(0,0,0,0);cursor:pointer;display:inline-block;height:15px;width:15px;margin-right:3px;vertical-align:middle}.kint-rich dt.kint-parent:hover>nav,.kint-rich>footer>nav:hover{background-position:0 25%}.kint-rich dt.kint-parent.kint-show>nav,.kint-rich>footer.kint-show>nav{background-position:0 50%}.kint-rich dt.kint-parent.kint-show:hover>nav,.kint-rich>footer.kint-show>nav:hover{background-position:0 75%}.kint-rich dt.kint-parent.kint-locked>nav{background-position:0 100%}.kint-rich dt.kint-parent+dd{display:none;border-left:1px dashed #d7d7d7}.kint-rich dt.kint-parent.kint-show+dd{display:block}.kint-rich var,.kint-rich var a{color:#06f;font-style:normal}.kint-rich dt:hover var,.kint-rich dt:hover var a{color:red}.kint-rich dfn{font-style:normal;font-family:monospace;color:#1d1e1e}.kint-rich pre{color:#1d1e1e;margin:0 0 0 12px;padding:5px;overflow-y:hidden;border-top:0;border:1px solid #d7d7d7;background:#f8f8f8;display:block;word-break:normal}.kint-rich .kint-popup-trigger,.kint-rich .kint-access-path-trigger,.kint-rich .kint-search-trigger{background:rgba(29,30,30,.8);border-radius:3px;height:16px;font-size:16px;margin-left:5px;font-weight:bold;width:16px;text-align:center;float:right !important;cursor:pointer;color:#f8f8f8;position:relative;overflow:hidden;line-height:17.6px}.kint-rich .kint-popup-trigger:hover,.kint-rich .kint-access-path-trigger:hover,.kint-rich .kint-search-trigger:hover{color:#1d1e1e;background:#f8f8f8}.kint-rich dt.kint-parent>.kint-popup-trigger{line-height:19.2px}.kint-rich .kint-search-trigger{font-size:20px}.kint-rich input.kint-search{display:none;border:1px solid #d7d7d7;border-top-width:0;border-bottom-width:0;padding:4px;float:right !important;margin:-4px 0;color:#1d1e1e;background:#f8f8f8;height:24px;width:160px;position:relative;z-index:100}.kint-rich input.kint-search.kint-show{display:block}.kint-rich .kint-search-root ul.kint-tabs>li:not(.kint-search-match){background:#f8f8f8;opacity:.5}.kint-rich .kint-search-root dl:not(.kint-search-match){opacity:.5}.kint-rich .kint-search-root dl:not(.kint-search-match)>dt{background:#f8f8f8}.kint-rich .kint-search-root dl:not(.kint-search-match) dl,.kint-rich .kint-search-root dl:not(.kint-search-match) ul.kint-tabs>li:not(.kint-search-match){opacity:1}.kint-rich div.access-path{background:#f8f8f8;display:none;margin-top:5px;padding:4px;white-space:pre}.kint-rich div.access-path.kint-show{display:block}.kint-rich footer{padding:0 3px 3px;font-size:9px;background:rgba(0,0,0,0)}.kint-rich footer>.kint-popup-trigger{background:rgba(0,0,0,0);color:#1d1e1e}.kint-rich footer nav{height:10px;width:10px;background-size:10px 50px}.kint-rich footer>ol{display:none;margin-left:32px}.kint-rich footer.kint-show>ol{display:block}.kint-rich a{color:#1d1e1e;text-shadow:none;text-decoration:underline}.kint-rich a:hover{color:#1d1e1e;border-bottom:1px dotted #1d1e1e}.kint-rich ul{list-style:none;padding-left:12px}.kint-rich ul:not(.kint-tabs) li{border-left:1px dashed #d7d7d7}.kint-rich ul:not(.kint-tabs) li>dl{border-left:none}.kint-rich ul.kint-tabs{margin:0 0 0 12px;padding-left:0;background:#f8f8f8;border:1px solid #d7d7d7;border-top:0}.kint-rich ul.kint-tabs>li{background:#f8f8f8;border:1px solid #d7d7d7;cursor:pointer;display:inline-block;height:24px;margin:2px;padding:0 12px;vertical-align:top}.kint-rich ul.kint-tabs>li:hover,.kint-rich ul.kint-tabs>li.kint-active-tab:hover{border-color:#aaa;color:red}.kint-rich ul.kint-tabs>li.kint-active-tab{background:#f8f8f8;border-top:0;margin-top:-1px;height:27px;line-height:24px}.kint-rich ul.kint-tabs>li:not(.kint-active-tab){line-height:20px}.kint-rich ul.kint-tabs li+li{margin-left:0}.kint-rich ul.kint-tab-contents>li{display:none}.kint-rich ul.kint-tab-contents>li.kint-show{display:block}.kint-rich dt:hover+dd>ul>li.kint-active-tab{border-color:#aaa;color:red}.kint-rich dt>.kint-color-preview{width:16px;height:16px;display:inline-block;vertical-align:middle;margin-left:10px;border:1px solid #d7d7d7;background-color:#ccc;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path fill="%23FFF" d="M0 0h1v2h1V1H0z"/></svg>');background-size:100%}.kint-rich dt>.kint-color-preview:hover{border-color:#aaa}.kint-rich dt>.kint-color-preview>div{width:100%;height:100%}.kint-rich table{border-collapse:collapse;empty-cells:show;border-spacing:0}.kint-rich table *{font-size:12px}.kint-rich table dt{background:none;padding:2px}.kint-rich table dt .kint-parent{min-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.kint-rich table td,.kint-rich table th{border:1px solid #d7d7d7;padding:2px;vertical-align:center}.kint-rich table th{cursor:alias}.kint-rich table td:first-child,.kint-rich table th{font-weight:bold;background:#f8f8f8;color:#1d1e1e}.kint-rich table td{background:#f8f8f8;white-space:pre}.kint-rich table td>dl{padding:0}.kint-rich table pre{border-top:0;border-right:0}.kint-rich table thead th:first-child{background:none;border:0}.kint-rich table tr:hover>td{box-shadow:0 0 1px 0 #aaa inset}.kint-rich table tr:hover var{color:red}.kint-rich table ul.kint-tabs li.kint-active-tab{height:20px;line-height:17px}.kint-rich pre.kint-source{margin-left:-1px}.kint-rich pre.kint-source[data-kint-filename]:before{display:block;content:attr(data-kint-filename);margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid #f8f8f8}.kint-rich pre.kint-source>div:before{display:inline-block;content:counter(kint-l);counter-increment:kint-l;border-right:1px solid #aaa;padding-right:8px;margin-right:8px}.kint-rich pre.kint-source>div.kint-highlight{background:#f8f8f8}.kint-rich .kint-microtime-lap{text-shadow:-1px 0 #aaa,0 1px #aaa,1px 0 #aaa,0 -1px #aaa;color:#f8f8f8;font-weight:bold}input.kint-note-input{width:100%}.kint-rich .kint-focused{box-shadow:0 0 3px 2px red}.kint-rich dt{font-weight:normal}.kint-rich dt.kint-parent{margin-top:4px}.kint-rich dl dl{margin-top:4px;padding-left:25px;border-left:none}.kint-rich>dl>dt{background:#f8f8f8}.kint-rich ul{margin:0;padding-left:0}.kint-rich ul:not(.kint-tabs)>li{border-left:0}.kint-rich ul.kint-tabs{background:#f8f8f8;border:1px solid #d7d7d7;border-width:0 1px 1px 1px;padding:4px 0 0 12px;margin-left:-1px;margin-top:-1px}.kint-rich ul.kint-tabs li,.kint-rich ul.kint-tabs li+li{margin:0 0 0 4px}.kint-rich ul.kint-tabs li{border-bottom-width:0;height:25px}.kint-rich ul.kint-tabs li:first-child{margin-left:0}.kint-rich ul.kint-tabs li.kint-active-tab{border-top:1px solid #d7d7d7;background:#fff;font-weight:bold;padding-top:0;border-bottom:1px solid #fff !important;margin-bottom:-1px}.kint-rich ul.kint-tabs li.kint-active-tab:hover{border-bottom:1px solid #fff}.kint-rich ul>li>pre{border:1px solid #d7d7d7}.kint-rich dt:hover+dd>ul{border-color:#aaa}.kint-rich pre{background:#fff;margin-top:4px;margin-left:25px}.kint-rich .kint-source{margin-left:-1px}.kint-rich .kint-source .kint-highlight{background:#cfc}.kint-rich .kint-parent.kint-show>.kint-search{border-bottom-width:1px}.kint-rich table td{background:#fff}.kint-rich table td>dl{padding:0;margin:0}.kint-rich table td>dl>dt.kint-parent{margin:0}.kint-rich table td:first-child,.kint-rich table td,.kint-rich table th{padding:2px 4px}.kint-rich table dd,.kint-rich table dt{background:#fff}.kint-rich table tr:hover>td{box-shadow:none;background:#cfc}
+</style>
+
+        <!-- Style Css -->
+<link rel="stylesheet" href="https://manajemenaset.idampalada.com/assets/css/style.css?v=1745891936">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<!-- Time Picker CSS -->
+<link rel="stylesheet" href="https://manajemenaset.idampalada.com/assets/css/time-picker.css">
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- DataTables -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://manajemenaset.idampalada.com/assets/pupr.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="https://manajemenaset.idampalada.com//assets/images/favicon.svg" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://manajemenaset.idampalada.com//assets/css/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://manajemenaset.idampalada.com//assets/css/app.css">
+
+    <link rel="stylesheet" href="https://manajemenaset.idampalada.com//assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="https://manajemenaset.idampalada.com//assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css" rel="stylesheet">
+
+    </head>
+
+<body>
+    <div id="app">
+        <!-- DEBUG-VIEW START 1 APPPATH\Views\admin\layouts\navbar.php -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container-fluid">
+        <div class="navbar-brand-wrapper">
+            <div class="app-brand">
+                <h3 class="app-title">
+                    <a class="navbar-brand-img" href="https://manajemenaset.idampalada.com/mainpage">
+    <img src="https://manajemenaset.idampalada.com/assets/images/logoPU.png" style="width: 13rem; height: 3rem" alt="PUPR Logo">
+</a>
+
+                </h3>
+            </div>
+        </div>
+
+<button class="navbar-toggler d-lg-none"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#mobileMenu"
+        aria-controls="mobileMenu"
+        aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link " href="https://manajemenaset.idampalada.com/mainpage">
+                        <i class="bi bi-house-door-fill"></i> Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link " href="https://manajemenaset.idampalada.com/user/barang">
+                    <i class="bi bi-box-seam"></i> Barang
+                </a>
+            </li>
+
+                            <li class="nav-item">
+                    <a class="nav-link scan-menu " href="https://manajemenaset.idampalada.com/user/scan">
+                        <i class="bi bi-qr-code-scan"></i> Scan
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link " href="https://manajemenaset.idampalada.com/homepage">
+                        <i class="bi bi-car-front-fill"></i> Kendaraan
+                    </a>
+                </li>
+
+                                    <!-- <li class="nav-item">
+                        <a class="nav-link " href="https://manajemenaset.idampalada.com/user/riwayat">
+                            <i class="bi bi-sliders"></i> Riwayat
+                        </a>
+                    </li> -->
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="https://manajemenaset.idampalada.com/user/ruangan">
+                        <i class="bi bi-door-open"></i> Ruangan
+                    </a>
+                </li>
+                <li>
+                <a class="nav-link" href="https://manajemenaset.idampalada.com/user/profile">
+                    <i class="bi bi-person-circle"></i> Profile
+                </a>
+            </li>
+
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="https://manajemenaset.idampalada.com/logout">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+
+                <span>|</span>
+
+                <a class="nav-link" style="color:blue">raka</a>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header">
+        <h6 class="mb-0">Hello, raka</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+
+    <div class="offcanvas-body p-0">
+        <ul class="list-group list-group-flush mobile-menu">
+
+            <li class="list-group-item">
+                <a href="https://manajemenaset.idampalada.com/mainpage">
+                    <i class="bi bi-house-door-fill"></i> Home
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="https://manajemenaset.idampalada.com/user/barang">
+                    <i class="bi bi-box-seam"></i> Barang
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="https://manajemenaset.idampalada.com/user/scan">
+                    <i class="bi bi-qr-code-scan"></i> Scan
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="https://manajemenaset.idampalada.com/homepage">
+                    <i class="bi bi-car-front-fill"></i> Kendaraan
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="https://manajemenaset.idampalada.com/user/ruangan">
+                    <i class="bi bi-door-open"></i> Room
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="https://manajemenaset.idampalada.com/user/profile">
+                    <i class="bi bi-person-circle"></i> Profile
+                </a>
+            </li>
+
+            <li class="list-group-item text-danger">
+                <a href="https://manajemenaset.idampalada.com/logout">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<style>
+    @media (max-width: 991px) {
+
+    .offcanvas {
+        width: 78%;
+        max-width: 320px;
+    }
+
+    .mobile-menu a {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+        text-decoration: none;
+        color: #333;
+        font-size: .95rem;
+    }
+
+    .mobile-menu .list-group-item {
+        padding: .9rem 1.2rem;
+        border-color: #f1f1f1;
+    }
+
+    .mobile-menu .list-group-item:hover {
+        background: #f8f9fa;
+    }
+}
+
+    </style>
+
+<!-- DEBUG-VIEW ENDED 1 APPPATH\Views\admin\layouts\navbar.php -->
+
+        <div id="main" class="layout-navbar">
+            <div class="content-wrapper container">
+                
+<div class="container-fluid px-4">
+    <!-- ===================== Page header ===================== -->
+    <header class="kv-page-header">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb kv-breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Kendaraan</li>
+            </ol>
+        </nav>
+
+        <div class="kv-page-header__row">
+            <div class="kv-page-header__intro">
+                <h1 class="kv-page-title">Kendaraan</h1>
+                <p class="kv-page-subtitle">Kelola dan pantau aset kendaraan dinas Kementerian Pekerjaan Umum.</p>
+            </div>
+
+            <dl class="kv-stats" id="kvStats">
+                <div class="kv-stat">
+                    <dt>Total armada</dt>
+                    <dd><span data-kv-stat="total">0</span></dd>
+                </div>
+                <div class="kv-stat kv-stat--available">
+                    <dt><span class="kv-dot"></span>Tersedia</dt>
+                    <dd><span data-kv-stat="tersedia">0</span></dd>
+                </div>
+                <div class="kv-stat kv-stat--borrowed">
+                    <dt><span class="kv-dot"></span>Dipinjam</dt>
+                    <dd><span data-kv-stat="dipinjam">0</span></dd>
+                </div>
+            </dl>
+        </div>
+    </header>
+
+    <!-- ===================== Filter toolbar ===================== -->
+    <div class="filter-bar" role="search">
+        <div class="kv-toolbar">
+            <div class="kv-field kv-field--search">
+                <label class="kv-field__label" for="searchKendaraan">Cari</label>
+                <div class="search-wrapper">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input type="search" class="form-control form-control-modern"
+                        placeholder="Cari merk, no. polisi, atau kode barang..." id="searchKendaraan"
+                        autocomplete="off">
+                </div>
+            </div>
+
+            <div class="kv-field">
+                <label class="kv-field__label" for="filterKategori">Kategori</label>
+                <select class="form-select form-select-modern" id="filterKategori">
+                    <option value="">Semua Kategori</option>
+                    <option value="KDJ">Kendaraan Dinamis Jalan</option>
+                    <option value="KDO">Kendaraan Dinamis Off-road</option>
+                    <option value="KDF">Kendaraan Dinamis Fasilitas</option>
+                </select>
+            </div>
+
+            <div class="kv-field">
+                <label class="kv-field__label" for="filterStatus">Status</label>
+                <select class="form-select form-select-modern" id="filterStatus">
+                    <option value="">Semua Status</option>
+                    <option value="Tersedia">Tersedia</option>
+                    <option value="Dipinjam">Dipinjam</option>
+                    <option value="Verifikasi">Dalam Verifikasi</option>
+                </select>
+            </div>
+
+            <div class="kv-field kv-field--toggle">
+                <span class="kv-field__label" id="kvViewLabel">Tampilan</span>
+                <div class="btn-group view-toggle" role="group" aria-labelledby="kvViewLabel">
+                    <button type="button" class="btn btn-view active" data-kv-view="grid"
+                        aria-pressed="true" title="Tampilan kartu">
+                        <i class="bi bi-grid-3x3-gap" aria-hidden="true"></i>
+                        <span class="visually-hidden">Tampilan kartu</span>
+                    </button>
+                    <button type="button" class="btn btn-view" data-kv-view="list"
+                        aria-pressed="false" title="Tampilan daftar">
+                        <i class="bi bi-list" aria-hidden="true"></i>
+                        <span class="visually-hidden">Tampilan daftar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="kv-toolbar__meta">
+            <p class="kv-result-count" id="kvResultCount" role="status" aria-live="polite"></p>
+            <button type="button" class="kv-reset" id="kvResetFilter" hidden>
+                <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Atur ulang filter
+            </button>
+        </div>
+    </div>
+
+    <!-- Vehicle Cards -->
+    <div class="vehicles-container">
+        <div class="vehicle-grid">
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1759826516_626e4e421e7df04280f7.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1759826516_626e4e421e7df04280f7.jpg&quot;]'
+                                    alt="Hiace">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Hiace">Hiace</h3>
+                            <span class="vc-plate" title="Nomor polisi">B1234S</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2020</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>7 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>A01</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Tidak Diketahui</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('1')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B1234S')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('1')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdj">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1759826619_f85863896c9d01522767.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1759826619_f85863896c9d01522767.jpg&quot;]'
+                                    alt="Medium Bus">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Medium Bus">Medium Bus</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 7306 SPA</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2018</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>8 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDJ</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>10012345</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Tidak Diketahui</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('4')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 7306 SPA')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('4')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdo">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1744076379_24851240572c5a9f0adc.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1744076379_24851240572c5a9f0adc.jpg&quot;]'
+                                    alt="Mitsubishi Fuso">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Mitsubishi Fuso">Mitsubishi Fuso</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 3987 PIS</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2012</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>3 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDO</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>20012345</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Tidak Diketahui</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('6')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 3987 PIS')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('6')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1744076520_4623bc52dc50867aa202.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1744076520_4623bc52dc50867aa202.jpg&quot;]'
+                                    alt="Ambulance">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Ambulance">Ambulance</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 1111 BBH</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2015</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>7 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>30012345</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Tidak Diketahui</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('8')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 1111 BBH')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('8')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdj">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1744185772_a834a8ca6269fba2cea4.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1744185772_a834a8ca6269fba2cea4.jpg&quot;]'
+                                    alt="IONIQ 5">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="IONIQ 5">IONIQ 5</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 1212 ONQ</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2022</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>6 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDJ</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>4001234</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Tidak Diketahui</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('9')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 1212 ONQ')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('9')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdj">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1744186159_47afac342ca8d748d32e.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1744186159_47afac342ca8d748d32e.jpg&quot;]'
+                                    alt="Toyota Camry">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Toyota Camry">Toyota Camry</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 2576 SNV</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2024</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>5 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDJ</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>5009320</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Hijau</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('11')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 2576 SNV')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('11')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdj">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1744336169_823176cb3023f9c2b31e.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1744336169_823176cb3023f9c2b31e.jpg&quot;]'
+                                    alt="Mitsubishi Xpander">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Mitsubishi Xpander">Mitsubishi Xpander</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 3728 SNC</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2018</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>7 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDJ</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>37827832</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Hijau</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('12')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 3728 SNC')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('12')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1745200320_249b37dc943cfadbe139.jpeg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1745200320_249b37dc943cfadbe139.jpeg&quot;]'
+                                    alt="Toyota Hiace">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Toyota Hiace">Toyota Hiace</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 7415 SPA</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2016</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>25 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>600123</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Hijau</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('13')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 7415 SPA')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('13')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdo">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1745200714_eaddf15bd806ee6d8b3a.jpeg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1745200714_eaddf15bd806ee6d8b3a.jpeg&quot;]'
+                                    alt="IONIC 5">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="IONIC 5">IONIC 5</h3>
+                            <span class="vc-plate" title="Nomor polisi">D 41 DY</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2022</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>4 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDO</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>7003892</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Hijau</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('14')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('D 41 DY')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('14')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="dalam verifikasi" data-kategori="kdo">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/1745204984_2c3f72bfe54d55a5caac.jpeg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;1745204984_2c3f72bfe54d55a5caac.jpeg&quot;]'
+                                    alt="Toyota Hiace">
+                        <span class="vc-status-badge status-pending">
+                            <i class="bi bi-clock-fill" aria-hidden="true"></i>Dalam Verifikasi</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Toyota Hiace">Toyota Hiace</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 7417  SPA</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2018</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>8 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDO</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>8003293</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Putih</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-muted" disabled> <i class="bi bi-clock"></i> Menunggu Verifikasi </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 7417  SPA')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('15')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdj">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1752114676_686f25f4ab6f9.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1752114676_686f25f4ab6f9.jpg&quot;,&quot;kendaraan_1752114676_686f25f4ac1ed.jpg&quot;,&quot;kendaraan_1752114676_686f25f4ac5f0.jpg&quot;,&quot;kendaraan_1752114676_686f25f4ac98c.jpg&quot;,&quot;kendaraan_1752114676_686f25f4ace63.jpg&quot;]'
+                                    alt="Toyota Camry">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Toyota Camry">Toyota Camry</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 2023 SEN</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2024</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>6 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDJ</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>83279439784983</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Putih</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('16')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 2023 SEN')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('16')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="dipinjam" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1752205361_6870883186b46.jpeg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1752205361_6870883186b46.jpeg&quot;,&quot;kendaraan_1752205361_6870883187c19.jpeg&quot;,&quot;kendaraan_1752205361_6870883188469.jpg&quot;,&quot;kendaraan_1752205361_6870883188a71.jpg&quot;,&quot;kendaraan_1752205361_6870883189309.jpg&quot;]'
+                                    alt="Fortuner">
+                        <span class="vc-status-badge status-borrowed">
+                            <i class="bi bi-arrow-repeat" aria-hidden="true"></i>Dipinjam</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Fortuner">Fortuner</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 2025 SMC</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2020</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>8 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>76887</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Putih</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                        <p class="vc-return-date">
+                            <i class="bi bi-calendar-check" aria-hidden="true"></i>
+                            <span class="vc-return-label">Tanggal kembali</span>
+                            <span class="vc-return-value">17/12/2025</span>
+                        </p>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-info" onclick="openPengembalianModal('17')"> <i class="bi bi-box-arrow-in-down"></i> Kembalikan Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('17')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1760515929_68ef5759eae5b.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1760515929_68ef5759eae5b.jpg&quot;]'
+                                    alt="Ambulance PUPR">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Ambulance PUPR">Ambulance PUPR</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 2025 SMT</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2018</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>10 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>8932893289</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Putih</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('18')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 2025 SMT')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('18')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdj">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1760590288_68f079d070571.png"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1760590288_68f079d070571.png&quot;]'
+                                    alt="Colt Diesel">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Colt Diesel">Colt Diesel</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 3606 PIK</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2018</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>4 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDJ</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>12345678</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Putih</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('20')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 3606 PIK')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('20')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1760702023_68f22e47c50a1.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1760702023_68f22e47c50a1.jpg&quot;]'
+                                    alt="Truk ABC">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Truk ABC">Truk ABC</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 8021 SPA</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2018</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>5 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>098989</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Hijau</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('22')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 8021 SPA')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('22')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1761877538_69041e2246824.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1761877538_69041e2246824.jpg&quot;]'
+                                    alt="Ambulanceee">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Ambulanceee">Ambulanceee</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 5555 SMC</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2020</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>7 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>0812768</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Putih</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('25')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 5555 SMC')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('25')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1762228218_690977fa454c6.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1762228218_690977fa454c6.jpg&quot;]'
+                                    alt="Ambulance TEST STNK">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Ambulance TEST STNK">Ambulance TEST STNK</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 8872 SPA</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2018</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>8 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>032093</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Putih</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-warn">Rusak Ringan</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('26')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 8872 SPA')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('26')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vehicle-card" data-status="tersedia" data-kategori="kdf">
+                <div class="vc-card">
+                    <div class="vc-image-wrap">
+                        <img loading="lazy" decoding="async" src="https://manajemenaset.idampalada.com/uploads/images/kendaraan_1763706231_69200577da419.jpg"
+                                    class="vc-image image-preview-trigger"
+                                    data-images='[&quot;kendaraan_1763706231_69200577da419.jpg&quot;]'
+                                    alt="Ambulance Pusdatin">
+                        <span class="vc-status-badge status-available">
+                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>Tersedia</span>
+                    </div>
+
+                    <div class="vc-body">
+                        <div class="vc-head">
+                            <h3 class="vc-title" title="Ambulance Pusdatin">Ambulance Pusdatin</h3>
+                            <span class="vc-plate" title="Nomor polisi">B 1876 SMC</span>
+                        </div>
+
+                        <dl class="vc-specs">
+                            <div class="vc-spec">
+                                <dt>Tahun</dt>
+                                <dd>2020</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Kapasitas</dt>
+                                <dd>9 Orang</dd>
+                            </div>
+                            <div class="vc-spec">
+                                <dt>Tipe</dt>
+                                <dd>KDF</dd>
+                            </div>
+                        </dl>
+
+                        <dl class="vc-sub">
+                            <div class="vc-sub__item">
+                                <dt>Kode barang</dt>
+                                <dd>090909</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Warna</dt>
+                                <dd>Hitam</dd>
+                            </div>
+                            <div class="vc-sub__item">
+                                <dt>Kondisi</dt>
+                                <dd><span class="vc-condition-badge cond-good">Baik</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="vc-footer">
+                        <div class="vc-actions">
+                        <button type="button" class="vc-btn vc-btn-primary" onclick="openPeminjamanModal('27')"> <i class="bi bi-plus-circle"></i> Pinjam Kendaraan </button>
+                        <div class="vc-actions__row">
+                            <button type="button" class="vc-btn vc-btn-success" onclick="trackKendaraan('B 1876 SMC')"> <i class="bi bi-geo-alt"></i> Status </button>
+                            <button type="button" title="Timeline Peminjaman" aria-label="Timeline Peminjaman" class="vc-btn vc-btn-secondary" onclick="showTimelineModal('27')"> <i class="bi bi-clock-history"></i> Timeline </button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="kv-empty" id="kvEmptyState" hidden>
+                <div class="kv-empty__icon" aria-hidden="true"><i class="bi bi-search"></i></div>
+                <h2 class="kv-empty__title">Kendaraan tidak ditemukan</h2>
+                <p class="kv-empty__text">Tidak ada kendaraan yang cocok dengan kata kunci atau filter yang dipilih. Coba ubah kata kunci atau atur ulang filter.</p>
+                <button type="button" class="vc-btn vc-btn-primary kv-empty__action" data-kv-reset>
+                    <i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Atur ulang filter
+                </button>
+            </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- Semua modal di bawah ini SAMA PERSIS strukturnya dengan versi -->
+<!-- sebelumnya (id, name, action, JS hook tidak diubah) — hanya   -->
+<!-- kelas Bootstrap dasarnya dipertahankan agar semua script lama -->
+<!-- (validasi, kamera, tab, dsb) tetap berjalan tanpa perubahan.  -->
+<!-- ============================================================ -->
+
+<!-- Modal Pengembalian -->
+<div class="modal fade" id="modalPengembalian" tabindex="-1" aria-labelledby="modalPengembalianLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow modal-modern">
+            <div class="modal-header modal-header-modern">
+                <h5 class="modal-title" id="modalPengembalianLabel">Form Pengembalian Kendaraan</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="formPengembalian" action="https://manajemenaset.idampalada.com/AsetKendaraan/kembali" method="post"
+                class="kembali needs-validation" enctype="multipart/form-data" novalidate>
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <input type="hidden" id="kendaraan_id_hidden" name="kendaraan_id" value="">
+                        <input type="hidden" id="is_late_return" name="is_late_return" value="false">
+                        <input type="hidden" id="days_late" name="days_late" value="0">
+
+                        <ul class="nav nav-tabs mb-3" id="pengembalianTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="pihak-kesatu-tab" data-bs-toggle="tab"
+                                    data-bs-target="#pihak-kesatu" type="button" role="tab"
+                                    aria-controls="pihak-kesatu" aria-selected="true">Pihak Kesatu</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="detail-kendaraan-tab" data-bs-toggle="tab"
+                                    data-bs-target="#detail-kendaraan" type="button" role="tab"
+                                    aria-controls="detail-kendaraan" aria-selected="false">Detail Kendaraan</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="pengembalianTabContent">
+                            <div class="tab-pane fade show active" id="pihak-kesatu" role="tabpanel"
+                                aria-labelledby="pihak-kesatu-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="nama_penanggung_jawab" class="form-label">Nama Penanggung Jawab</label>
+                                            <input type="text" class="form-control" id="nama_penanggung_jawab"
+                                                name="nama_penanggung_jawab" required readonly>
+                                            <div class="invalid-feedback">Nama penanggung jawab harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nip_nrp" class="form-label">NIP / NRP</label>
+                                            <input type="text" class="form-control" id="nip_nrp" name="nip_nrp" required readonly>
+                                            <div class="invalid-feedback">NIP/NRP harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="pangkat_golongan" class="form-label">Pangkat / Golongan</label>
+                                            <input type="text" class="form-control" id="pangkat_golongan" name="pangkat_golongan"
+                                                required readonly>
+                                            <div class="invalid-feedback">Pangkat/Golongan harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="jabatan" class="form-label">Jabatan</label>
+                                            <input type="text" class="form-control" id="jabatan" name="jabatan" required readonly>
+                                            <div class="invalid-feedback">Jabatan harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="unit_organisasi" class="form-label">Unit Organisasi</label>
+                                            <input type="text" class="form-control" id="unit_organisasi" name="unit_organisasi"
+                                                required readonly>
+                                            <div class="invalid-feedback">Unit organisasi harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="alamat_rumah" class="form-label">Alamat Rumah</label>
+                                            <input type="text" class="form-control" id="alamat_rumah" name="alamat_rumah" required readonly>
+                                            <div class="invalid-feedback">Alamat rumah harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="no_ktp" class="form-label">No. KTP</label>
+                                            <input type="text" class="form-control" id="no_ktp" name="no_ktp" required readonly>
+                                            <div class="invalid-feedback">No. KTP harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="rating_pengguna" class="form-label">Rating Penggunaan Kendaraan <span class="text-danger"> *</span></label>
+                                            <div class="rating-container">
+                                                <div class="star-rating d-flex align-items-center">
+                                                    <div class="rating-stars">
+                                                        <input type="radio" id="star5" name="rating_pengguna" value="5" required />
+                                                        <label for="star5" title="Sangat Baik"><i class="bi bi-star-fill"></i></label>
+
+                                                        <input type="radio" id="star4" name="rating_pengguna" value="4" />
+                                                        <label for="star4" title="Baik"><i class="bi bi-star-fill"></i></label>
+
+                                                        <input type="radio" id="star3" name="rating_pengguna" value="3" />
+                                                        <label for="star3" title="Cukup"><i class="bi bi-star-fill"></i></label>
+
+                                                        <input type="radio" id="star2" name="rating_pengguna" value="2" />
+                                                        <label for="star2" title="Kurang"><i class="bi bi-star-fill"></i></label>
+
+                                                        <input type="radio" id="star1" name="rating_pengguna" value="1" />
+                                                        <label for="star1" title="Sangat Kurang"><i class="bi bi-star-fill"></i></label>
+                                                    </div>
+                                                    <span class="ms-3 rating-text">0/5</span>
+                                                </div>
+                                                <div class="form-text">
+                                                    <small><i class="bi bi-info-circle"></i> Berikan rating penggunaan kendaraan (1-5)</small>
+                                                </div>
+                                                <div class="invalid-feedback d-block" style="display:none!important" id="rating-error">
+                                                    Rating penggunaan kendaraan harus dipilih.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="kendaraan_id" class="form-label">Kendaraan</label>
+                                            <select class="form-control" id="kendaraan_id_kembali" name="kendaraan_id" required>
+                                                <option value="" disabled selected>Kendaraan</option>
+                                            </select>
+                                            <div class="invalid-feedback">Kendaraan harus dipilih.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="pengemudi" class="form-label">Nama Pengemudi</label>
+                                            <input type="text" class="form-control" id="pengemudi" name="pengemudi" required readonly>
+                                            <div class="invalid-feedback">Nama pengemudi harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="no_hp" class="form-label">Nomor HP</label>
+                                            <input type="text" class="form-control" id="no_hp" name="no_hp" required readonly>
+                                            <div class="invalid-feedback">Nomor HP harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="tanggal_pinjam" class="form-label">Tanggal Pinjam</label>
+                                            <input type="date" class="form-control" id="tanggal_pinjam" name="tanggal_pinjam"
+                                                readonly required>
+                                            <div class="invalid-feedback">Tanggal pinjam harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="tanggal_kembali" class="form-label">Tanggal Kembali</label>
+                                            <input type="date" class="form-control" id="tanggal_kembali" name="tanggal_kembali"
+                                                required min="2026-07-20">
+                                            <small class="form-text text-muted">
+                                                Tanggal kembali yang telah ditetapkan pada saat peminjaman.
+                                            </small>
+                                            <div class="invalid-feedback">Tanggal kembali harus diisi.</div>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="kondisi_kembali" class="form-label">Kondisi Kendaraan Saat Pengembalian <span class="text-danger"> *</span></label>
+                                            <select class="form-control" id="kondisi_kembali" name="kondisi_kembali" required>
+                                                <option value="" disabled selected>Pilih Kondisi</option>
+                                                <option value="Baik">Baik</option>
+                                                <option value="Rusak Ringan">Rusak Ringan</option>
+                                                <option value="Rusak Berat">Rusak Berat</option>
+                                            </select>
+                                            <div class="invalid-feedback">Kondisi kendaraan harus dipilih.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="late_return_section" class="col-12 mb-3 d-none">
+                                    <div class="card border-danger">
+                                        <div class="card-header bg-danger text-white">
+                                            <h5 class="mb-0">
+                                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                                Keterlambatan Pengembalian
+                                            </h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="alert alert-warning" role="alert">
+                                                <p><strong>Perhatian:</strong> Anda terlambat mengembalikan kendaraan selama <span id="late_days_display" class="fw-bold">0</span> hari.</p>
+                                                <p class="mb-0">Mohon berikan alasan keterlambatan untuk melanjutkan proses pengembalian.</p>
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label for="alasan_keterlambatan" class="form-label">Alasan Keterlambatan <span class="text-danger"> *</span></label>
+                                                <textarea class="form-control" id="alasan_keterlambatan" name="alasan_keterlambatan" rows="3"
+                                                    placeholder="Jelaskan alasan keterlambatan pengembalian kendaraan"></textarea>
+                                                <div class="invalid-feedback">Alasan keterlambatan wajib diisi untuk pengembalian yang terlambat.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Ambil Foto Kendaraan <span class="text-danger"> *</span></label>
+                                    <div>
+                                        <button type="button" class="btn btn-secondary" id="btn-camera-capture">
+                                            <i class="bi bi-camera"></i> Ambil Foto
+                                        </button>
+                                    </div>
+
+                                    <div id="camera-container" class="mt-2" style="display:none;">
+                                        <video id="camera-feed" autoplay style="width:100%; max-width:640px;"></video>
+                                        <div class="mt-2">
+                                            <button type="button" class="btn btn-primary" id="btn-take-photo">Ambil Foto</button>
+                                            <button type="button" class="btn btn-danger" id="btn-cancel-camera">Batal</button>
+                                        </div>
+                                    </div>
+                                    <div id="photo-preview" class="mt-2" style="display:none;">
+                                        <img id="captured-photo" class="img-fluid" style="max-width:640px;">
+                                        <div class="mt-2">
+                                            <button type="button" class="btn btn-warning" id="btn-retake-photo">Ambil Ulang</button>
+                                        </div>
+                                    </div>
+                                    <canvas id="photo-canvas" style="display:none;"></canvas>
+                                    <input type="hidden" id="photo-data" name="photo_data" required>
+                                    <div class="invalid-feedback d-block" style="display:none!important" id="photo-error">
+                                        Foto kendaraan harus diambil.
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary" id="btn-next-tab">Selanjutnya</button>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="detail-kendaraan" role="tabpanel"
+                                aria-labelledby="detail-kendaraan-tab">
+                                <div class="card p-3 mb-3">
+                                    <h6 class="card-title fw-bold">Pihak Kedua <small class="text-muted">(Dapat diedit)</small></h6>
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-3">Nama <span class="text-danger"> *</span></div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="pihak_kedua_nama" name="pihak_kedua_nama"
+                                                value="Pak Udin" required>
+                                            <div class="invalid-feedback">Nama pihak kedua harus diisi.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-3">NIP <span class="text-danger"> *</span></div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="pihak_kedua_nip" name="pihak_kedua_nip"
+                                                value="12345678" required>
+                                            <div class="invalid-feedback">NIP pihak kedua harus diisi.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-3">Jabatan <span class="text-danger"> *</span></div>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" id="pihak_kedua_jabatan" name="pihak_kedua_jabatan"
+                                                value="Kepala Satuan Kerja Selaku Kuasa Pengguna Barang" required>
+                                            <div class="invalid-feedback">Jabatan pihak kedua harus diisi.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label for="nomor_sip" class="form-label">Nomor SIP / Surat Penanggung Jawab <span class="text-danger"> *</span></label>
+                                    <input type="text" class="form-control" id="nomor_sip" name="nomor_sip" required>
+                                    <div class="invalid-feedback">Nomor SIP/Surat Penanggung Jawab harus diisi.</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="kategori_id" class="form-label">Jenis Kendaraan</label>
+                                            <input type="text" class="form-control" id="kategori_id" name="kategori_id" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="no_polisi_detail" class="form-label">Nomor Polisi</label>
+                                            <input type="text" class="form-control" id="no_polisi_detail" name="no_polisi_detail" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="kode_barang_detail" class="form-label">Kode Barang</label>
+                                            <input type="text" class="form-control" id="kode_barang_detail" name="kode_barang_detail" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nup_detail" class="form-label">NUP</label>
+                                            <input type="text" class="form-control" id="nup_detail" name="nup_detail" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="tahun_pembuatan" class="form-label">Tahun Pembuatan</label>
+                                            <input type="text" class="form-control" id="tahun_pembuatan" name="tahun_pembuatan" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nomor_stnk" class="form-label">Nomor STNK</label>
+                                            <input type="text" class="form-control" id="nomor_stnk" name="nomor_stnk" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <label for="merk_detail" class="form-label">Merk</label>
+                                            <input type="text" class="form-control" id="merk_detail" name="merk_detail" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="warna" class="form-label">Warna</label>
+                                            <input type="text" class="form-control" id="warna" name="warna" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nomor_mesin" class="form-label">Nomor Mesin</label>
+                                            <input type="text" class="form-control" id="nomor_mesin" name="nomor_mesin" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nomor_rangka" class="form-label">Nomor Rangka</label>
+                                            <input type="text" class="form-control" id="nomor_rangka" name="nomor_rangka" readonly>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="nomor_bpkb" class="form-label">Nomor BPKB</label>
+                                            <input type="text" class="form-control" id="nomor_bpkb" name="nomor_bpkb" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn btn-secondary" id="btn-prev-tab">Kembali</button>
+                                    <button type="submit" class="btn btn-primary rounded-pill">Konfirmasi Pengembalian</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer d-none">
+                    <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Peminjaman -->
+<div class="modal fade" id="modalPeminjaman" tabindex="-1" aria-labelledby="modalPeminjamanLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow modal-modern">
+            <div class="modal-header modal-header-modern">
+                <h5 class="modal-title" id="modalPeminjamanLabel">Form Peminjaman Kendaraan</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="formPeminjaman" action="https://manajemenaset.idampalada.com/AsetKendaraan/pinjam" method="post" class="pinjam"
+                enctype="multipart/form-data">
+
+                <div id="page1" class="modal-body p-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="nama_penanggung_jawab" class="form-label">Nama Penanggung Jawab</label>
+                                <input type="text" class="form-control" id="nama_penanggung_jawab"
+                                    name="nama_penanggung_jawab" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="nip_nrp" class="form-label">NIP / NRP</label>
+                                <input type="text" class="form-control" id="nip_nrp" name="nip_nrp" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="no_ktp" class="form-label">No. KTP</label>
+                                <input type="text" class="form-control" id="no_ktp" name="no_ktp" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="alamat_rumah" class="form-label">Alamat Rumah</label>
+                                <textarea class="form-control" id="alamat_rumah" name="alamat_rumah" rows="2"
+                                    required></textarea>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="jabatan" class="form-label">Unit Organisasi</label>
+                                <select
+                                    class="form-control "
+                                    name="unit_organisasi" id="unit_organisasi" required>
+                                    <option value="" class="text-muted" disabled selected>Pilih</option>
+                                    <option value="Setjen">Sekretariat Jenderal</option>
+                                    <option value="Itjen">Inspektorat Jenderal</option>
+                                    <option value="Ditjen Sumber Daya Air">Direktorat Jenderal Sumber Daya Air</option>
+                                    <option value="Ditjen Bina Marga">Direktorat Jenderal Bina Marga</option>
+                                    <option value="Ditjen Cipta Karya">Direktorat Jenderal Cipta Karya</option>
+                                    <option value="Ditjen Perumahan">Direktorat Jenderal Perumahan</option>
+                                    <option value="Ditjen Bina Konstruksi">Direktorat Jenderal Bina Konstruksi</option>
+                                    <option value="Ditjen Pembiayaan Infrastruktur Pekerjaan Umum dan Perumahan">
+                                        Direktorat
+                                        Jenderal Pembiayaan Infrastruktur Pekerjaan Umum dan
+                                        Perumahan</option>
+                                    <option value="BPIW">Badan Pengembangan Infrastruktur Wilayah</option>
+                                    <option value="BPSDM">Badan Pengembangan Sumber Daya Manusia</option>
+                                    <option value="BPJT">Badan Pengatur Jalan Tol</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="jabatan" class="form-label">Jabatan</label>
+                                <select
+                                    class="form-control "
+                                    name="jabatan" id="jabatan" required>
+                                    <option value="" class="text-muted" disabled selected>Pilih</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="pangkat_golongan" class="form-label">Pangkat / Golongan</label>
+                                <select class="form-control" name="pangkat_golongan" id="pangkat_golongan" required>
+                                    <option value="" class="text-muted" disabled selected>Pilih</option>
+                                    <option value="IV A">IV A - Pembina</option>
+                                    <option value="IV B">IV B - Pembina Tingkat 1</option>
+                                    <option value="IV C">IV C - Pembina Tingkat Muda</option>
+                                    <option value="IV D">IV D - Pembina Tingkat Madya</option>
+                                    <option value="IV E">IV E - Pembina Utama</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="kendaraan_id" class="form-label">Pilih Kendaraan</label>
+                                <select class="form-control" id="kendaraan_id_pinjam" name="kendaraan_id" required>
+                                    <option value="" disabled selected>Pilih Kendaraan</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="pengemudi" class="form-label">Nama Pengemudi</label>
+                                <input type="text" class="form-control" id="pengemudi" name="pengemudi" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="no_hp" class="form-label">Nomor HP</label>
+                                <input type="text" class="form-control" id="no_hp" name="no_hp" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="tanggal_pinjam" class="form-label">Tanggal Pinjam</label>
+                                <input type="date" class="form-control" id="tanggal_pinjam" name="tanggal_pinjam"
+                                    required min="2026-07-20">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="tanggal_kembali" class="form-label">Tanggal Kembali</label>
+                                <input type="date" class="form-control" id="tanggal_kembali" name="tanggal_kembali"
+                                    required min="2026-07-20">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="urusan_kedinasan" class="form-label">Urusan Kedinasan</label>
+                            <textarea class="form-control" id="urusan_kedinasan" name="urusan_kedinasan" rows="3"
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="button" id="nextBtn" class="btn btn-primary rounded-pill">Selanjutnya &raquo;</button>
+                    </div>
+                </div>
+
+                <div id="page2" class="modal-body p-4" style="display: none;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="detail_jenis_kendaraan" class="form-label">Jenis Kendaraan</label>
+                                <input type="text" class="form-control" id="detail_jenis_kendaraan" readonly>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="detail_nopol" class="form-label">Nomor Polisi</label>
+                                <input type="text" class="form-control" id="detail_nopol" readonly>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="detail_merk" class="form-label">Merk/Type</label>
+                                <input type="text" class="form-control" id="detail_merk" readonly>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="detail_warna" class="form-label">Warna</label>
+                                <input type="text" class="form-control" id="detail_warna" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="detail_nomor_mesin" class="form-label">Nomor Mesin</label>
+                                <input type="text" class="form-control" id="detail_nomor_mesin" readonly>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="detail_no_rangka" class="form-label">Nomor Rangka</label>
+                                <input type="text" class="form-control" id="detail_no_rangka" readonly>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="detail_kode_barang" class="form-label">Kode Barang</label>
+                                <input type="text" class="form-control" id="detail_kode_barang" readonly>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="detail_nup" class="form-label">NUP</label>
+                                <input type="text" class="form-control" id="detail_nup" readonly>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="detail_tahun_pembuatan" class="form-label">Tahun Pembuatan</label>
+                                <input type="text" class="form-control" id="detail_tahun_pembuatan" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <button type="button" id="prevBtn" class="btn btn-light rounded-pill">&laquo; Kembali</button>
+                        <button type="submit" class="btn btn-primary rounded-pill">Ajukan Peminjaman</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Aset -->
+<div class="modal fade" id="modalEditAset" tabindex="-1" aria-labelledby="modalEditAsetLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow modal-modern">
+            <div class="modal-header modal-header-modern">
+                <h5 class="modal-title" id="modalEditAsetLabel">Form Edit Kendaraan</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="formEditAset" method="post" enctype="multipart/form-data">
+                <div class="modal-body p-4">
+                    <input type="hidden" id="edit_id" name="id">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="edit_kategori_id" class="form-label">Kategori</label>
+                                <select class="form-control" id="edit_kategori_id" name="kategori_id" required>
+                                    <option value="" class="text-muted" disabled selected>Pilih Kategori Aset</option>
+                                    <option class="fw-bold text-dark" value="KDJ">Kendaraan Dinamis Jalan (KDJ)</option>
+                                    <option class="text-muted" disabled>Sedan, Hatchback, dan SUV</option>
+                                    <option class="fw-bold text-dark" value="KDO">Kendaraan Dinamis Off-road (KDO)</option>
+                                    <option class="text-muted" disabled>Bus, Truk, dan Kendaraan Box</option>
+                                    <option class="fw-bold text-dark" value="KDF">Kendaraan Dinamis Fasilitas (KDF)</option>
+                                    <option class="text-muted" disabled>Ambulance, Mobil Derek, dan Mobil Crane</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_kode_barang" class="form-label">Kode Barang</label>
+                                <input type="text" class="form-control" id="edit_kode_barang" name="kode_barang" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_nup" class="form-label">NUP</label>
+                                <input type="text" class="form-control" id="edit_nup" name="nup">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_merk" class="form-label">Merk</label>
+                                <input type="text" class="form-control" id="edit_merk" name="merk" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_warna" class="form-label">Warna</label>
+                                <input type="text" class="form-control" id="edit_warna" name="warna">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_tahun_pembuatan" class="form-label">Tahun Pembuatan</label>
+                                <input type="number" class="form-control" id="edit_tahun_pembuatan" name="tahun_pembuatan">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label for="edit_kapasitas" class="form-label">Kapasitas</label>
+                                <input type="number" class="form-control" id="edit_kapasitas" name="kapasitas">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_no_polisi" class="form-label">Nomor Polisi</label>
+                                <input type="text" class="form-control" id="edit_no_polisi" name="no_polisi">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_nomor_mesin" class="form-label">Nomor Mesin</label>
+                                <input type="text" class="form-control" id="edit_nomor_mesin" name="nomor_mesin">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_no_rangka" class="form-label">No Rangka</label>
+                                <input type="text" class="form-control" id="edit_no_rangka" name="no_rangka">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_no_stnk" class="form-label">Nomor STNK</label>
+                                <input type="text" class="form-control" id="edit_no_stnk" name="no_stnk" placeholder="Masukkan nomor STNK">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_no_bpkb" class="form-label">Nomor BPKB</label>
+                                <input type="text" class="form-control" id="edit_no_bpkb" name="no_bpkb" placeholder="Masukkan nomor BPKB">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_kondisi" class="form-label">Kondisi</label>
+                                <select class="form-control" id="edit_kondisi" name="kondisi">
+                                    <option value="Baik">Baik</option>
+                                    <option value="Rusak Ringan">Rusak Ringan</option>
+                                    <option value="Rusak Berat">Rusak Berat</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="edit_gambar_mobil" class="form-label">Gambar Mobil (JPG/PNG)</label>
+                                <input type="file" class="form-control" id="edit_gambar_mobil" name="gambar_mobil" accept="image/jpeg,image/png">
+                                <small class="text-muted">Kosongkan jika tidak ingin mengubah gambar</small>
+                                <div class="mt-2">
+                                    <img id="current_image_preview" class="img-fluid rounded" style="max-height: 150px; display: none;" alt="Preview Gambar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary rounded-pill">Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Image Preview -->
+<div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0 shadow modal-modern">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title">Foto Kendaraan</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="thumbnail-container d-flex justify-content-center py-3 bg-light">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Tracking Map -->
+<div class="modal fade" id="trackingMapModal" tabindex="-1" aria-labelledby="trackingMapLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow modal-modern">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="trackingMapLabel">Peta Lokasi Kendaraan</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0" style="height: 500px;">
+                <div id="trackingMap" style="height: 100%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Timeline Peminjaman -->
+<div class="modal fade" id="modalTimeline" tabindex="-1" aria-labelledby="modalTimelineLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content border-0 shadow modal-modern">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalTimelineLabel">Verifikasi Peminjaman & Pengembalian</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0">
+                <ul class="nav nav-tabs border-0" id="timelineTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="peminjaman-tab" data-bs-toggle="tab" data-bs-target="#peminjaman" type="button" role="tab" aria-controls="peminjaman" aria-selected="true">
+                            Peminjaman Pending <span id="peminjamanPendingCount" class="badge rounded-pill bg-danger ms-1">0</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pengembalian-tab" data-bs-toggle="tab" data-bs-target="#pengembalian" type="button" role="tab" aria-controls="pengembalian" aria-selected="false">
+                            Pengembalian Pending <span id="pengembalianPendingCount" class="badge rounded-pill bg-danger ms-1">0</span>
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content p-3" id="timelineTabContent">
+                    <div class="tab-pane fade show active" id="peminjaman" role="tabpanel" aria-labelledby="peminjaman-tab">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Penanggung Jawab</th>
+                                        <th>Kendaraan</th>
+                                        <th>Urusan Kedinasan</th>
+                                        <th>Status</th>
+                                        <th>Dokumen</th>
+                                        <th>Tanggal Pinjam</th>
+                                        <th>Tanggal Kembali</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="peminjamanPendingTable">
+                                    <tr>
+                                        <td colspan="9" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <p class="mt-3">Memuat data peminjaman...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="pengembalian" role="tabpanel" aria-labelledby="pengembalian-tab">
+                        <div class="table-responsive">
+                            <h5 class="mb-3">Pengembalian Pending</h5>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Penanggung Jawab</th>
+                                        <th>Kendaraan</th>
+                                        <th>Urusan Kedinasan</th>
+                                        <th>Status</th>
+                                        <th>Dokumen</th>
+                                        <th>Tanggal Pinjam</th>
+                                        <th>Tanggal Kembali</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pengembalianPendingTable">
+                                    <tr>
+                                        <td colspan="9" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <p class="mt-3">Memuat data pengembalian...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h5 class="mt-4 mb-3">Histori Penolakan Pengembalian</h5>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <th>Penanggung Jawab</th>
+                                        <th>Kendaraan</th>
+                                        <th>Status</th>
+                                        <th>Alasan Penolakan</th>
+                                        <th>Dokumen</th>
+                                        <th>Tanggal Pinjam</th>
+                                        <th>Tanggal Kembali</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="penolakanHistoryTable">
+                                    <tr>
+                                        <td colspan="8" class="text-center py-4">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                            <p class="mt-3">Memuat histori penolakan...</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODERN STYLESHEET ================= -->
+<style>
+/* ============================================================================
+   Kendaraan — enterprise dashboard UI
+   Design tokens: 8pt spacing scale, 3-step radius, 3-step elevation,
+   PUPR blue (#3950A2) retained as the brand primary.
+   ========================================================================== */
+:root{
+    /* brand */
+    --kv-primary:#3950A2;
+    --kv-primary-hover:#32478f;
+    --kv-primary-active:#2c3d80;
+    --kv-primary-dark:#2c3d80;
+    --kv-primary-soft:#eef1fb;
+    --kv-primary-ring:rgba(57,80,162,.28);
+
+    /* neutrals */
+    --kv-bg:#f7f8fa;
+    --kv-surface:#ffffff;
+    --kv-surface-sunken:#f9fafb;
+    --kv-border:#e5e7eb;
+    --kv-border-strong:#d1d5db;
+    --kv-text:#111827;
+    --kv-text-secondary:#4b5563;
+    --kv-text-muted:#6b7280;
+
+    /* semantic status */
+    --kv-success:#15803d;
+    --kv-success-soft:#eaf7ef;
+    --kv-success-border:#bbe5c9;
+    --kv-warning:#92400e;
+    --kv-warning-soft:#fdf3e3;
+    --kv-warning-border:#f3ddb4;
+    --kv-info:#1d4ed8;
+    --kv-info-soft:#eaf0fe;
+    --kv-info-border:#c2d4fb;
+    --kv-danger:#b91c1c;
+    --kv-danger-soft:#fdeceb;
+
+    /* 8pt spacing scale */
+    --kv-s1:4px;  --kv-s2:8px;  --kv-s3:12px; --kv-s4:16px;
+    --kv-s5:24px; --kv-s6:32px; --kv-s7:40px; --kv-s8:56px;
+
+    /* radius */
+    --kv-radius-sm:8px;
+    --kv-radius:12px;
+    --kv-radius-lg:16px;
+
+    /* elevation */
+    --kv-shadow-sm:0 1px 2px rgba(17,24,39,.05);
+    --kv-shadow:0 1px 3px rgba(17,24,39,.06), 0 4px 12px rgba(17,24,39,.05);
+    --kv-shadow-lg:0 8px 24px rgba(17,24,39,.10), 0 2px 6px rgba(17,24,39,.05);
+
+    --kv-ease:cubic-bezier(.4,0,.2,1);
+}
+
+.kendaraan-page{ color:var(--kv-text); }
+
+/* ------------------------------------------------------------------ shared */
+.kv-page-header,
+.filter-bar,
+.vehicles-container,
+.kv-empty{ font-feature-settings:"tnum" 0; }
+
+.kv-page-header :focus-visible,
+.filter-bar :focus-visible,
+.vehicles-container :focus-visible,
+.kv-empty :focus-visible{
+    outline:2px solid var(--kv-primary);
+    outline-offset:2px;
+    border-radius:var(--kv-radius-sm);
+}
+
+/* ================================================================= HEADER */
+.kv-page-header{
+    padding:var(--kv-s5) 0 var(--kv-s4);
+    margin-bottom:var(--kv-s5);
+    border-bottom:1px solid var(--kv-border);
+}
+.kv-breadcrumb{
+    background:transparent; padding:0; margin:0 0 var(--kv-s3);
+    font-size:13px; line-height:1.4;
+}
+.kv-breadcrumb .breadcrumb-item a{
+    color:var(--kv-text-muted); text-decoration:none;
+    transition:color .15s var(--kv-ease);
+}
+.kv-breadcrumb .breadcrumb-item a:hover{ color:var(--kv-primary); text-decoration:underline; }
+.kv-breadcrumb .breadcrumb-item.active{ color:var(--kv-text-secondary); font-weight:600; }
+
+.kv-page-header__row{
+    display:flex; flex-wrap:wrap; align-items:flex-end;
+    justify-content:space-between; gap:var(--kv-s5);
+}
+.kv-page-header__intro{ min-width:min(100%,280px); }
+
+.kv-page-title{
+    font-size:30px; line-height:1.2; font-weight:800;
+    letter-spacing:-.02em; margin:0 0 var(--kv-s1); color:var(--kv-text);
+}
+.kv-page-subtitle{
+    margin:0; font-size:14px; line-height:1.55; color:var(--kv-text-muted);
+    max-width:56ch;
+}
+
+/* stat chips */
+.kv-stats{
+    display:flex; flex-wrap:wrap; gap:var(--kv-s2);
+    margin:0; padding:0;
+}
+.kv-stat{
+    display:flex; flex-direction:column; gap:2px;
+    min-width:104px; padding:var(--kv-s2) var(--kv-s3);
+    background:var(--kv-surface);
+    border:1px solid var(--kv-border);
+    border-radius:var(--kv-radius);
+    box-shadow:var(--kv-shadow-sm);
+}
+.kv-stat dt{
+    display:flex; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:600; letter-spacing:.03em; text-transform:uppercase;
+    color:var(--kv-text-muted); margin:0;
+}
+.kv-stat dd{
+    margin:0; font-size:20px; font-weight:700; line-height:1.1;
+    color:var(--kv-text); font-variant-numeric:tabular-nums;
+}
+.kv-dot{
+    width:7px; height:7px; border-radius:50%; background:var(--kv-text-muted); flex:0 0 auto;
+}
+.kv-stat--available .kv-dot{ background:#22c55e; }
+.kv-stat--borrowed  .kv-dot{ background:#3b82f6; }
+
+/* ================================================================ TOOLBAR */
+.filter-bar{
+    position:sticky; top:0; z-index:20;
+    background:var(--kv-surface);
+    border:1px solid var(--kv-border);
+    border-radius:var(--kv-radius-lg);
+    box-shadow:var(--kv-shadow-sm);
+    padding:var(--kv-s4);
+    margin-bottom:var(--kv-s5);
+}
+.kv-toolbar{
+    display:grid;
+    grid-template-columns:minmax(220px,2fr) minmax(150px,1fr) minmax(150px,1fr) auto;
+    gap:var(--kv-s3);
+    align-items:end;
+}
+.kv-field{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.kv-field__label{
+    font-size:11.5px; font-weight:600; letter-spacing:.03em; text-transform:uppercase;
+    color:var(--kv-text-muted);
+}
+
+.form-select-modern,
+.form-control-modern{
+    width:100%;
+    border:1px solid var(--kv-border-strong);
+    background:var(--kv-surface);
+    border-radius:var(--kv-radius-sm);
+    font-size:14px; line-height:1.4;
+    padding:9px 12px;
+    color:var(--kv-text);
+    transition:border-color .15s var(--kv-ease), box-shadow .15s var(--kv-ease);
+}
+.form-control-modern::placeholder{ color:#9ca3af; }
+.form-select-modern:hover,
+.form-control-modern:hover{ border-color:#9ca3af; }
+.form-select-modern:focus,
+.form-control-modern:focus{
+    outline:none;
+    border-color:var(--kv-primary);
+    box-shadow:0 0 0 3px var(--kv-primary-ring);
+}
+
+.search-wrapper{ position:relative; }
+.search-wrapper i{
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    color:var(--kv-text-muted); font-size:14px; pointer-events:none;
+}
+.search-wrapper .form-control-modern{ padding-left:36px; }
+.search-wrapper .form-control-modern::-webkit-search-cancel-button{ cursor:pointer; }
+
+.kv-field--toggle{ align-items:flex-start; }
+.view-toggle{
+    border:1px solid var(--kv-border-strong);
+    border-radius:var(--kv-radius-sm);
+    overflow:hidden; background:var(--kv-surface);
+}
+.view-toggle .btn-view{
+    border:none; background:transparent; color:var(--kv-text-muted);
+    padding:9px 14px; font-size:15px; line-height:1;
+    transition:background .15s var(--kv-ease), color .15s var(--kv-ease);
+}
+.view-toggle .btn-view + .btn-view{ border-left:1px solid var(--kv-border); }
+.view-toggle .btn-view:hover{ background:var(--kv-surface-sunken); color:var(--kv-text); }
+.view-toggle .btn-view.active{ background:var(--kv-primary); color:#fff; }
+.view-toggle .btn-view:focus-visible{ outline-offset:-2px; }
+
+.kv-toolbar__meta{
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    gap:var(--kv-s2);
+    margin-top:var(--kv-s3); padding-top:var(--kv-s3);
+    border-top:1px solid var(--kv-border);
+}
+.kv-result-count{
+    margin:0; font-size:13px; color:var(--kv-text-muted);
+}
+.kv-result-count strong{ color:var(--kv-text); font-weight:700; font-variant-numeric:tabular-nums; }
+.kv-reset{
+    display:inline-flex; align-items:center; gap:6px;
+    background:transparent; border:1px solid var(--kv-border-strong);
+    border-radius:var(--kv-radius-sm);
+    padding:6px 12px; font-size:13px; font-weight:600; color:var(--kv-text-secondary);
+    transition:background .15s var(--kv-ease), border-color .15s var(--kv-ease), color .15s var(--kv-ease);
+}
+.kv-reset:hover{ background:var(--kv-surface-sunken); border-color:#9ca3af; color:var(--kv-text); }
+.kv-reset[hidden]{ display:none; }
+
+/* =================================================================== GRID */
+.vehicle-grid{
+    /* Container-relative, not viewport-relative: the page sits inside a Bootstrap
+       .container, so column count must follow the content box. Yields 4 columns on
+       desktop, 2-3 on tablet and 1 on mobile without hard-coded breakpoints. */
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(min(100%,248px),1fr));
+    gap:var(--kv-s5);
+    align-items:stretch;
+}
+@media (max-width:1099px){ .vehicle-grid{ gap:var(--kv-s4); } }
+@media (max-width:575px){  .vehicle-grid{ grid-template-columns:minmax(0,1fr); } }
+
+.vehicle-card{ display:flex; min-width:0; }
+
+/* =================================================================== CARD */
+.vc-card{
+    position:relative;
+    width:100%;
+    background:var(--kv-surface);
+    border:1px solid var(--kv-border);
+    border-radius:var(--kv-radius-lg);
+    box-shadow:var(--kv-shadow-sm);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:border-color .2s var(--kv-ease), box-shadow .2s var(--kv-ease), transform .2s var(--kv-ease);
+}
+.vc-card:hover{
+    border-color:var(--kv-border-strong);
+    box-shadow:var(--kv-shadow-lg);
+    transform:translateY(-2px);
+}
+.vc-card:focus-within{
+    border-color:var(--kv-primary);
+    box-shadow:var(--kv-shadow), 0 0 0 3px var(--kv-primary-ring);
+}
+
+/* --- media --- */
+.vc-image-wrap{
+    position:relative;
+    aspect-ratio:16/10;
+    background:var(--kv-surface-sunken);
+    overflow:hidden;
+    border-bottom:1px solid var(--kv-border);
+}
+.vc-image-wrap::before{
+    /* skeleton shimmer, covered as soon as the image paints */
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(100deg,#f1f2f5 8%,#e8eaee 18%,#f1f2f5 33%);
+    background-size:200% 100%;
+    animation:kv-shimmer 1.4s linear infinite;
+}
+@keyframes kv-shimmer{ from{ background-position:150% 0; } to{ background-position:-50% 0; } }
+.vc-image-wrap.is-loaded::before{ content:none; }
+.vc-image{
+    position:relative;
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    cursor:zoom-in;
+    transition:transform .4s var(--kv-ease);
+}
+.vc-card:hover .vc-image{ transform:scale(1.04); }
+
+/* --- status badge: solid, high contrast, dot + label --- */
+.vc-status-badge{
+    position:absolute; top:var(--kv-s3); left:var(--kv-s3); z-index:2;
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:12px; font-weight:700; letter-spacing:.01em;
+    padding:5px 10px 5px 8px;
+    border-radius:999px;
+    border:1px solid transparent;
+    box-shadow:var(--kv-shadow-sm);
+}
+.vc-status-badge i{ font-size:11px; }
+.status-available{ background:var(--kv-success-soft); color:var(--kv-success); border-color:var(--kv-success-border); }
+.status-pending  { background:var(--kv-warning-soft); color:var(--kv-warning); border-color:var(--kv-warning-border); }
+.status-borrowed { background:var(--kv-info-soft);    color:var(--kv-info);    border-color:var(--kv-info-border); }
+
+.vc-info-badge{
+    position:absolute; top:var(--kv-s3); right:var(--kv-s3); z-index:2;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--kv-danger); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:13px;
+    cursor:pointer; box-shadow:var(--kv-shadow-sm);
+}
+
+/* --- body --- */
+.vc-body{
+    padding:var(--kv-s4);
+    flex:1 1 auto;
+    display:flex; flex-direction:column; gap:var(--kv-s3);
+    min-width:0;
+}
+
+/* tier 1 — identity */
+.vc-head{ display:flex; flex-direction:column; gap:6px; min-width:0; }
+.vc-title{
+    margin:0;
+    font-size:17px; line-height:1.3; font-weight:700; letter-spacing:-.01em;
+    color:var(--kv-text);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.vc-plate{
+    align-self:flex-start;
+    font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+    font-size:13px; font-weight:700; letter-spacing:.06em;
+    color:var(--kv-text-secondary);
+    background:var(--kv-surface-sunken);
+    border:1px solid var(--kv-border);
+    border-radius:6px;
+    padding:3px 8px;
+    max-width:100%;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* tier 2 — primary specs */
+.vc-specs{
+    /* auto-fit keeps the three stats on one row when the card is wide enough and
+       reflows them instead of clipping the labels when it is not */
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(64px,1fr));
+    gap:var(--kv-s3) var(--kv-s2);
+    margin:0; padding:var(--kv-s3) 0;
+    border-top:1px solid var(--kv-border);
+    border-bottom:1px solid var(--kv-border);
+}
+.vc-spec{ min-width:0; }
+.vc-spec dt{
+    margin:0 0 2px;
+    font-size:10.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase;
+    color:var(--kv-text-muted);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.vc-spec dd{
+    margin:0;
+    font-size:14px; font-weight:600; line-height:1.3; color:var(--kv-text);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+/* tier 3 — secondary detail */
+.vc-sub{ margin:0; display:flex; flex-direction:column; gap:6px; }
+.vc-sub__item{
+    display:flex; align-items:center; justify-content:space-between; gap:var(--kv-s2);
+    font-size:12.5px; min-width:0;
+}
+.vc-sub__item dt{ margin:0; font-weight:500; color:var(--kv-text-muted); flex:0 0 auto; }
+.vc-sub__item dd{
+    margin:0; font-weight:600; color:var(--kv-text-secondary);
+    text-align:right; min-width:0;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+.vc-condition-badge{
+    display:inline-block;
+    font-size:11px; font-weight:700; line-height:1.4;
+    padding:2px 8px; border-radius:999px; white-space:nowrap;
+}
+.cond-good{ background:var(--kv-success-soft); color:var(--kv-success); }
+.cond-warn{ background:var(--kv-warning-soft); color:var(--kv-warning); }
+.cond-bad { background:var(--kv-danger-soft);  color:var(--kv-danger); }
+
+/* return date — contextual, only on borrowed cards */
+.vc-return-date{
+    display:flex; align-items:center; gap:var(--kv-s2);
+    margin:0; padding:var(--kv-s2) var(--kv-s3);
+    background:var(--kv-info-soft);
+    border:1px solid var(--kv-info-border);
+    border-radius:var(--kv-radius-sm);
+    font-size:12.5px;
+}
+.vc-return-date i{ color:var(--kv-info); font-size:13px; flex:0 0 auto; }
+.vc-return-label{ color:var(--kv-text-secondary); }
+.vc-return-value{ margin-left:auto; font-weight:700; color:var(--kv-info); font-variant-numeric:tabular-nums; }
+
+/* --- actions: one primary, then secondary + tertiary side by side --- */
+.vc-footer{ padding:0 var(--kv-s4) var(--kv-s4); margin-top:auto; }
+.vc-actions{ display:flex; flex-direction:column; gap:var(--kv-s2); }
+.vc-actions__row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(0,1fr)); gap:var(--kv-s2); }
+
+.vc-btn{
+    width:100%;
+    display:inline-flex; align-items:center; justify-content:center; gap:6px;
+    border:1px solid transparent; border-radius:var(--kv-radius-sm);
+    padding:10px 14px;
+    font-size:13.5px; font-weight:600; line-height:1.2;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    cursor:pointer;
+    transition:background .15s var(--kv-ease), border-color .15s var(--kv-ease),
+               color .15s var(--kv-ease), box-shadow .15s var(--kv-ease);
+}
+.vc-btn i{ font-size:14px; flex:0 0 auto; }
+.vc-btn:focus-visible{ outline:2px solid var(--kv-primary); outline-offset:2px; }
+
+/* primary — Pinjam Kendaraan / Kembalikan Kendaraan */
+.vc-btn-primary,
+.vc-btn-info{
+    background:var(--kv-primary); color:#fff; border-color:var(--kv-primary);
+    box-shadow:var(--kv-shadow-sm);
+}
+.vc-btn-primary:hover,
+.vc-btn-info:hover{ background:var(--kv-primary-hover); border-color:var(--kv-primary-hover); color:#fff; }
+.vc-btn-primary:active,
+.vc-btn-info:active{ background:var(--kv-primary-active); border-color:var(--kv-primary-active); }
+
+/* secondary — Status */
+.vc-btn-success{
+    background:var(--kv-surface); color:var(--kv-primary); border-color:var(--kv-border-strong);
+}
+.vc-btn-success:hover{ background:var(--kv-primary-soft); border-color:var(--kv-primary); color:var(--kv-primary-active); }
+.vc-btn-success:active{ background:#e2e8f8; }
+
+/* tertiary — Timeline */
+.vc-btn-secondary{
+    background:transparent; color:var(--kv-text-secondary); border-color:transparent;
+}
+.vc-btn-secondary:hover{ background:var(--kv-surface-sunken); color:var(--kv-text); }
+.vc-btn-secondary:active{ background:#eef0f3; }
+
+/* disabled — Menunggu Verifikasi */
+.vc-btn-muted,
+.vc-btn:disabled{
+    background:var(--kv-surface-sunken); color:#9ca3af; border-color:var(--kv-border);
+    cursor:not-allowed; box-shadow:none;
+}
+.vc-btn-outline{ background:var(--kv-surface); border-color:var(--kv-primary); color:var(--kv-primary); }
+.vc-btn-outline-danger{ background:var(--kv-surface); border-color:var(--kv-danger); color:var(--kv-danger); }
+
+.vc-documents{ margin-top:var(--kv-s1); }
+.vc-documents-header{ font-size:11.5px; font-weight:600; letter-spacing:.03em; text-transform:uppercase; color:var(--kv-text-muted); margin-bottom:6px; }
+.vc-doc-link{
+    display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600;
+    color:var(--kv-primary); border:1px solid var(--kv-border); border-radius:var(--kv-radius-sm);
+    padding:7px 10px; margin-bottom:6px; text-decoration:none;
+    transition:background .15s var(--kv-ease), border-color .15s var(--kv-ease);
+}
+.vc-doc-link:hover{ background:var(--kv-primary-soft); border-color:var(--kv-primary); }
+
+/* ============================================================== LIST VIEW */
+.vehicle-grid--list{ grid-template-columns:minmax(0,1fr); gap:var(--kv-s3); }
+@media (min-width:700px){
+    .vehicle-grid--list .vc-card{ flex-direction:row; align-items:stretch; }
+    .vehicle-grid--list .vc-image-wrap{ flex:0 0 220px; aspect-ratio:auto; border-bottom:none; border-right:1px solid var(--kv-border); }
+    .vehicle-grid--list .vc-body{ flex:1 1 auto; }
+    .vehicle-grid--list .vc-specs{ grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); }
+    .vehicle-grid--list .vc-footer{ flex:0 0 236px; padding:var(--kv-s4); display:flex; align-items:center; border-left:1px solid var(--kv-border); }
+    .vehicle-grid--list .vc-actions{ width:100%; }
+    .vehicle-grid--list .vc-card:hover{ transform:none; }
+}
+
+/* ============================================================ EMPTY STATE */
+.kv-empty{
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    padding:var(--kv-s8) var(--kv-s5);
+    background:var(--kv-surface);
+    border:1px dashed var(--kv-border-strong);
+    border-radius:var(--kv-radius-lg);
+}
+.kv-empty[hidden]{ display:none; }
+.kv-empty__icon{
+    width:48px; height:48px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--kv-surface-sunken); color:var(--kv-text-muted);
+    font-size:20px; margin-bottom:var(--kv-s4);
+}
+.kv-empty__title{ margin:0 0 var(--kv-s2); font-size:17px; font-weight:700; color:var(--kv-text); }
+.kv-empty__text{ margin:0 0 var(--kv-s5); font-size:14px; line-height:1.6; color:var(--kv-text-muted); max-width:44ch; }
+.kv-empty__action{ width:auto; }
+
+/* ============================================================== RESPONSIVE */
+@media (max-width:991px){
+    .kv-toolbar{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .kv-field--search{ grid-column:1 / -1; }
+}
+@media (max-width:768px){
+    .kv-page-header{ padding-top:var(--kv-s4); }
+    .kv-page-title{ font-size:24px; }
+    .kv-page-header__row{ align-items:flex-start; }
+    .kv-stats{ width:100%; }
+    .kv-stat{ flex:1 1 0; min-width:0; }
+    .filter-bar{ position:static; padding:var(--kv-s3); }
+    .kv-toolbar{ grid-template-columns:minmax(0,1fr); }
+    .kv-field--toggle{ display:none; }
+    .vc-actions__row{ grid-template-columns:minmax(0,1fr); }
+}
+
+@media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        animation-duration:.01ms !important; animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
+    .vc-card:hover{ transform:none; }
+    .vc-card:hover .vc-image{ transform:none; }
+}
+
+@media print{
+    .filter-bar,.vc-footer{ display:none !important; }
+    .vc-card{ box-shadow:none; break-inside:avoid; }
+}
+
+/* ---- Preserved legacy rules (modals, rating, readonly inputs) ---- */
+/* Modals */
+.modal-content.modal-modern{ border-radius:16px; overflow:hidden; }
+.modal-header-modern{ background:linear-gradient(135deg,var(--kv-primary) 0%, var(--kv-primary-dark) 100%); color:#fff; }
+
+/* Rating stars kept from original */
+.rating-stars{ direction:rtl; display:inline-block; }
+.rating-stars input[type="radio"]{ display:none; }
+.rating-stars label{ color:#bbb; font-size:1.5rem; padding:0; cursor:pointer; margin:0 2px; }
+.rating-stars label:hover, .rating-stars label:hover ~ label, .rating-stars input[type="radio"]:checked ~ label{ color:#ffb700; }
+.rating-text{ font-size:1rem; align-self:center; }
+.rating-container{ margin-bottom:10px; }
+
+#kendaraan_id_kembali[readonly]{
+    background-color:#e9ecef !important; pointer-events:none; -webkit-appearance:none; -moz-appearance:none; appearance:none;
+}
+#kendaraan_id_kembali{
+    background-color:#e9ecef !important; color:#6c757d !important; pointer-events:none !important;
+    cursor:not-allowed !important; border-color:#ced4da !important;
+}
+.form-control[readonly]{ background-color:#e9ecef; color:#6c757d; opacity:1; }
+
+
+</style>
+<script>
+    const BASE_URL = 'https://manajemenaset.idampalada.com/';
+    
+    // Initialize tooltips
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        });
+        
+        // Image hover zoom effect
+        const vehicleImages = document.querySelectorAll('.vehicle-image-wrapper img');
+        vehicleImages.forEach(img => {
+            img.addEventListener('mouseover', () => {
+                img.style.transform = 'scale(1.05)';
+            });
+            
+            img.addEventListener('mouseout', () => {
+                img.style.transform = 'scale(1)';
+            });
+        });
+        
+        // ------------------------------------------------------------------
+        // Image loading state — retires the skeleton shimmer once each photo
+        // has painted (or failed), so cards never sit on an endless placeholder.
+        // ------------------------------------------------------------------
+        document.querySelectorAll('.vc-image').forEach(function (img) {
+            var wrap = img.closest('.vc-image-wrap');
+            if (!wrap) return;
+            var settle = function () { wrap.classList.add('is-loaded'); };
+            if (img.complete && img.naturalWidth > 0) {
+                settle();
+            } else {
+                img.addEventListener('load', settle, { once: true });
+                img.addEventListener('error', settle, { once: true });
+            }
+        });
+
+        // ------------------------------------------------------------------
+        // Summary counters in the page header (derived from the rendered grid,
+        // no extra request).
+        // ------------------------------------------------------------------
+        var allCards = Array.prototype.slice.call(document.querySelectorAll('.vehicle-card'));
+
+        (function renderStats() {
+            var counts = { total: allCards.length, tersedia: 0, dipinjam: 0 };
+            allCards.forEach(function (card) {
+                var s = (card.dataset.status || '');
+                if (s.indexOf('tersedia') !== -1) counts.tersedia++;
+                else if (s.indexOf('dipinjam') !== -1) counts.dipinjam++;
+            });
+            Object.keys(counts).forEach(function (key) {
+                var el = document.querySelector('[data-kv-stat="' + key + '"]');
+                if (el) el.textContent = counts[key];
+            });
+        })();
+
+        // ------------------------------------------------------------------
+        // Filter functionality
+        // ------------------------------------------------------------------
+        const searchInput = document.getElementById('searchKendaraan');
+        if(searchInput) {
+            searchInput.addEventListener('input', filterVehicles);
+        }
+
+        const filterKategori = document.getElementById('filterKategori');
+        if(filterKategori) {
+            filterKategori.addEventListener('change', filterVehicles);
+        }
+
+        const filterStatus = document.getElementById('filterStatus');
+        if(filterStatus) {
+            filterStatus.addEventListener('change', filterVehicles);
+        }
+
+        const emptyState  = document.getElementById('kvEmptyState');
+        const resultCount = document.getElementById('kvResultCount');
+        const resetBtn    = document.getElementById('kvResetFilter');
+
+        function resetFilters() {
+            if (searchInput)   searchInput.value = '';
+            if (filterKategori) filterKategori.value = '';
+            if (filterStatus)   filterStatus.value = '';
+            filterVehicles();
+            if (searchInput) searchInput.focus();
+        }
+        document.querySelectorAll('#kvResetFilter, [data-kv-reset]').forEach(function (btn) {
+            btn.addEventListener('click', resetFilters);
+        });
+
+        function filterVehicles() {
+            const searchValue = searchInput ? searchInput.value.toLowerCase().trim() : '';
+            const kategoriValue = filterKategori ? filterKategori.value.toLowerCase() : '';
+            const statusValue = filterStatus ? filterStatus.value.toLowerCase() : '';
+
+            const vehicles = document.querySelectorAll('.vehicle-card');
+            let visible = 0;
+
+            vehicles.forEach(vehicle => {
+                const vehicleText = vehicle.textContent.toLowerCase();
+                // Kategori and status are published on the card as data attributes
+                // so the match no longer depends on fragile positional selectors.
+                const kategoriText = (vehicle.dataset.kategori || '').toLowerCase();
+                const statusText = (vehicle.dataset.status || '').toLowerCase();
+
+                const matchesSearch = searchValue === '' || vehicleText.includes(searchValue);
+                const matchesKategori = kategoriValue === '' || kategoriText.includes(kategoriValue);
+                const matchesStatus = statusValue === '' || statusText.includes(statusValue);
+
+                if (matchesSearch && matchesKategori && matchesStatus) {
+                    vehicle.style.display = '';
+                    visible++;
+                } else {
+                    vehicle.style.display = 'none';
+                }
+            });
+
+            const isFiltered = !!(searchValue || kategoriValue || statusValue);
+            if (resultCount) {
+                resultCount.innerHTML = 'Menampilkan <strong>' + visible + '</strong> dari <strong>' +
+                    vehicles.length + '</strong> kendaraan';
+            }
+            if (resetBtn)   resetBtn.hidden = !isFiltered;
+            if (emptyState) emptyState.hidden = visible !== 0;
+        }
+
+        filterVehicles();
+
+        // ------------------------------------------------------------------
+        // Grid / list view toggle (presentation only).
+        // ------------------------------------------------------------------
+        (function initViewToggle() {
+            var grid = document.querySelector('.vehicle-grid');
+            var buttons = document.querySelectorAll('.view-toggle .btn-view[data-kv-view]');
+            if (!grid || !buttons.length) return;
+
+            buttons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var mode = btn.dataset.kvView;
+                    buttons.forEach(function (other) {
+                        var on = other === btn;
+                        other.classList.toggle('active', on);
+                        other.setAttribute('aria-pressed', on ? 'true' : 'false');
+                    });
+                    grid.classList.toggle('vehicle-grid--list', mode === 'list');
+                });
+            });
+        })();
+    });
+    // JavaScript untuk fungsi kamera
+// JavaScript untuk fungsi kamera dan tab navigation
+$(document).ready(function() {
+    let stream;
+    
+    // Tombol navigasi tab
+    $('#btn-next-tab').click(function() {
+        $('#detail-kendaraan-tab').tab('show');
+    });
+    
+    $('#btn-prev-tab').click(function() {
+        $('#pihak-kesatu-tab').tab('show');
+    });
+    
+    // Tombol untuk membuka kamera
+    $('#btn-camera-capture').click(function() {
+        startCamera();
+    });
+    
+    // Tombol untuk mengambil foto
+    $('#btn-take-photo').click(function() {
+        takePhoto();
+    });
+    
+    // Tombol untuk membatalkan kamera
+    $('#btn-cancel-camera').click(function() {
+        stopCamera();
+    });
+    
+    // Tombol untuk mengambil ulang foto
+    $('#btn-retake-photo').click(function() {
+        $('#photo-preview').hide();
+        startCamera();
+    });
+    
+    // Fungsi untuk memulai kamera
+    function startCamera() {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(mediaStream) {
+                    stream = mediaStream;
+                    const video = document.getElementById('camera-feed');
+                    video.srcObject = mediaStream;
+                    video.play();
+                    $('#camera-container').show();
+                })
+                .catch(function(error) {
+                    console.error("Tidak dapat mengakses kamera:", error);
+                    alert("Tidak dapat mengakses kamera. Pastikan kamera tersedia dan izin diberikan.");
+                });
+        } else {
+            alert("Browser Anda tidak mendukung akses kamera");
+        }
+    }
+    
+    // Fungsi untuk mengambil foto
+    function takePhoto() {
+        const video = document.getElementById('camera-feed');
+        const canvas = document.getElementById('photo-canvas');
+        const context = canvas.getContext('2d');
+        
+        // Set ukuran canvas sama dengan video
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        
+        // Gambar video ke canvas
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Tambahkan timestamp pada foto
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, canvas.height - 30, canvas.width, 30);
+        context.fillStyle = "#000000";
+        context.font = "14px Arial";
+        const timestamp = new Date().toLocaleString();
+        context.fillText("Timestamp: " + timestamp, 10, canvas.height - 10);
+        
+        // Dapatkan data image
+        const photoData = canvas.toDataURL('image/jpeg');
+        
+        // Simpan data foto ke input hidden
+        $('#photo-data').val(photoData);
+        
+        // Tampilkan preview
+        $('#captured-photo').attr('src', photoData);
+        $('#photo-preview').show();
+        
+        // Sembunyikan kamera
+        $('#camera-container').hide();
+        
+        // Stop kamera
+        stopCamera();
+    }
+    
+    // Fungsi untuk menghentikan kamera
+    function stopCamera() {
+        if (stream) {
+            stream.getTracks().forEach(track => {
+                track.stop();
+            });
+            stream = null;
+        }
+        $('#camera-container').hide();
+    }
+    
+    // Mengisi form pengembalian saat kendaraan dipilih
+    $('#kendaraan_id_kembali').on('change', function() {
+        const kendaraanId = $(this).val();
+        if (kendaraanId) {
+            $('#kendaraan_id_hidden').val(kendaraanId);
+            $.ajax({
+                url: '/AsetKendaraan/getPeminjamanInfo',
+                type: 'POST',
+                data: { kendaraan_id: kendaraanId },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        // Isi data pihak kesatu
+                        $('#nama_penanggung_jawab').val(response.data.nama_penanggung_jawab);
+                        $('#nip_nrp').val(response.data.nip_nrp);
+                        $('#pangkat_golongan').val(response.data.pangkat_golongan);
+                        $('#jabatan').val(response.data.jabatan);
+                        $('#unit_organisasi').val(response.data.unit_organisasi);
+                        $('#alamat_rumah').val(response.data.alamat_rumah || '');
+                        $('#no_ktp').val(response.data.no_ktp || '');
+                        $('#pengemudi').val(response.data.pengemudi);
+                        $('#no_hp').val(response.data.no_hp);
+                        $('#tanggal_pinjam').val(response.data.tanggal_pinjam);
+                        $('#tanggal_kembali').val(response.data.tanggal_kembali);
+                        
+                        // Isi data kendaraan
+                        $('#kategori_id').val(response.asset.kategori_id);
+                        $('#no_polisi_detail').val(response.asset.no_polisi);
+                        $('#kode_barang_detail').val(response.asset.kode_barang);
+                        $('#nup_detail').val(response.asset.nup || '-');
+                        $('#tahun_pembuatan').val(response.asset.tahun_pembuatan || '-');
+                        $('#merk_detail').val(response.asset.merk);
+                        $('#warna').val(response.asset.warna || '-');
+                        $('#nomor_mesin').val(response.asset.nomor_mesin || '-');
+                        $('#nomor_rangka').val(response.asset.no_rangka || '-');
+                        
+                    } else {
+                        alert('Gagal mendapatkan data peminjaman');
+                    }
+                },
+                error: function() {
+                    alert('Terjadi kesalahan saat mengambil data');
+                }
+            });
+        }
+    });
+    
+    // Load kendaraan yang dipinjam
+    function loadKendaraanDipinjam() {
+        $.ajax({
+            url: '/AsetKendaraan/getKendaraanDipinjam',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                const select = $('#kendaraan_id_kembali');
+                select.find('option:not(:first)').remove();
+                
+                if (response.length > 0) {
+                    $.each(response, function(i, item) {
+                        select.append($('<option>', {
+                            value: item.id,
+                            text: item.merk + ' - ' + item.no_polisi
+                        }));
+                    });
+                } else {
+                    select.append($('<option>', {
+                        disabled: true,
+                        text: 'Tidak ada kendaraan yang dipinjam'
+                    }));
+                }
+            },
+            error: function() {
+                alert('Gagal memuat daftar kendaraan');
+            }
+        });
+    }
+    
+    // Inisialisasi
+    loadKendaraanDipinjam();
+    
+    // Form submit
+$('#formPengembalian').on('submit', function(e) {
+    e.preventDefault();
+    
+    // Validasi foto
+    if (!$('#photo-data').val()) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Perhatian',
+            text: 'Silahkan ambil foto kendaraan terlebih dahulu',
+            confirmButtonColor: '#dc3545'
+        });
+        $('#pihak-kesatu-tab').tab('show');
+        return false;
+    }
+    
+    // Validasi nomor SIP
+    if (!$('#nomor_sip').val()) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Perhatian',
+            text: 'Nomor SIP / Surat Penanggung Jawab harus diisi',
+            confirmButtonColor: '#dc3545'
+        });
+        return false;
+    }
+    
+    const formData = new FormData(this);
+    
+    // Tambahkan hidden field untuk berita_acara_pengembalian dari foto
+    if (!formData.has('berita_acara_pengembalian') || !formData.get('berita_acara_pengembalian').size) {
+        // Gunakan foto dari kamera sebagai berita acara jika tidak ada file yang diupload
+        formData.append('berita_acara_pengembalian', 'auto_generated_' + new Date().getTime() + '.jpg');
+    }
+    
+    $.ajax({
+        url: $(this).attr('action'),
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        beforeSend: function() {
+            $('button[type="submit"]').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Memproses...');
+        },
+        success: function(response) {
+            $('button[type="submit"]').prop('disabled', false).html('Konfirmasi Pengembalian');
+            
+            if (response.success) {
+                $('#modalPengembalian').modal('hide');
+                
+                // Tampilkan modal sukses dengan ikon ceklis
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Pengajuan pengembalian berhasil dikirim',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#198754'
+                }).then(() => {
+                    location.reload();
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: response.error || 'Gagal melakukan pengembalian',
+                    confirmButtonColor: '#dc3545'
+                });
+            }
+        },
+        error: function() {
+            $('button[type="submit"]').prop('disabled', false).html('Konfirmasi Pengembalian');
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Terjadi kesalahan saat memproses pengembalian',
+                confirmButtonColor: '#dc3545'
+            });
+        }
+    });
+});
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const kendaraanSelect = document.getElementById('kendaraan_id_pinjam');
+    
+    // Navigasi antar halaman
+    nextBtn.addEventListener('click', function() {
+        // Validasi form halaman 1
+        const requiredFields = page1.querySelectorAll('[required]');
+        let valid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value) {
+                valid = false;
+                field.classList.add('is-invalid');
+            } else {
+                field.classList.remove('is-invalid');
+            }
+        });
+        
+        if (!valid) {
+            alert('Mohon lengkapi semua field yang diperlukan');
+            return;
+        }
+        
+        // Jika valid, load data kendaraan dan pindah ke halaman 2
+        const selectedKendaraanId = kendaraanSelect.value;
+        if (selectedKendaraanId) {
+            loadKendaraanDetails(selectedKendaraanId);
+            page1.style.display = 'none';
+            page2.style.display = 'block';
+        } else {
+            alert('Silahkan pilih kendaraan terlebih dahulu');
+        }
+    });
+    
+    prevBtn.addEventListener('click', function() {
+        page2.style.display = 'none';
+        page1.style.display = 'block';
+    });
+    
+    // Load detail kendaraan
+    function loadKendaraanDetails(kendaraanId) {
+    fetch(`https://manajemenaset.idampalada.com/AsetKendaraan/getAsetById/${kendaraanId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const kendaraan = data.data;
+                
+                // Konversi kategori_id ke jenis kendaraan
+                let jenisKendaraan = "Tidak Diketahui";
+                switch(kendaraan.kategori_id) {
+                    case "KDJ":
+                        jenisKendaraan = "Kendaraan Dinamis Jalan (KDJ)";
+                        break;
+                    case "KDO":
+                        jenisKendaraan = "Kendaraan Dinamis Off-road (KDO)";
+                        break;
+                    case "KDF":
+                        jenisKendaraan = "Kendaraan Dinamis Fasilitas (KDF)";
+                        break;
+                    default:
+                        jenisKendaraan = kendaraan.kategori_id || "Tidak Diketahui";
+                }
+                
+                // Isi form dengan data kendaraan
+                document.getElementById('detail_jenis_kendaraan').value = jenisKendaraan;
+                document.getElementById('detail_nopol').value = kendaraan.no_polisi || '-';
+                document.getElementById('detail_merk').value = kendaraan.merk || '-';
+                document.getElementById('detail_warna').value = kendaraan.warna || '-';
+                document.getElementById('detail_nomor_mesin').value = kendaraan.nomor_mesin || '-';
+                document.getElementById('detail_no_rangka').value = kendaraan.no_rangka || '-';
+                document.getElementById('detail_kode_barang').value = kendaraan.kode_barang || '-';
+                document.getElementById('detail_nup').value = kendaraan.nup || '-';
+                document.getElementById('detail_tahun_pembuatan').value = kendaraan.tahun_pembuatan || '-';
+            } else {
+                alert('Gagal memuat detail kendaraan: ' + (data.error || 'Terjadi kesalahan'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat memuat detail kendaraan');
+        });
+}
+    
+    // Load daftar kendaraan tersedia saat form dibuka
+    function loadAvailableKendaraan() {
+        fetch('https://manajemenaset.idampalada.com/AsetKendaraan/getKendaraan')
+            .then(response => response.json())
+            .then(data => {
+                kendaraanSelect.innerHTML = '<option value="" disabled selected>Pilih Kendaraan</option>';
+                
+                data.forEach(kendaraan => {
+                    if (kendaraan.status_pinjam === 'Tersedia') {
+                        const option = document.createElement('option');
+                        option.value = kendaraan.id;
+                        option.textContent = `${kendaraan.merk} - ${kendaraan.no_polisi}`;
+                        kendaraanSelect.appendChild(option);
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal memuat daftar kendaraan');
+            });
+    }
+    
+    // Initialize
+    loadAvailableKendaraan();
+    
+    // Dynamic jabatan options based on unit organisasi selection
+    const unitOrganisasiSelect = document.getElementById('unit_organisasi');
+    const jabatanSelect = document.getElementById('jabatan');
+    
+    unitOrganisasiSelect.addEventListener('change', function() {
+        // Reset jabatan options
+        jabatanSelect.innerHTML = '<option value="" disabled selected>Pilih</option>';
+        
+        // Add jabatan options based on selected unit
+        const unit = this.value;
+        let jabatanOptions = [];
+        
+        switch(unit) {
+            case 'Setjen':
+                jabatanOptions = ['Sekretaris Jenderal', 'Kepala Biro', 'Kepala Bagian', 'Kepala Subbagian', 'Staff'];
+                break;
+            case 'Itjen':
+                jabatanOptions = ['Inspektur Jenderal', 'Sekretaris Inspektorat Jenderal', 'Inspektur', 'Staff'];
+                break;
+            // Add more cases as needed
+            default:
+                jabatanOptions = ['Direktur Jenderal', 'Sekretaris Direktorat Jenderal', 'Direktur', 'Staff'];
+        }
+        
+        jabatanOptions.forEach(jabatan => {
+            const option = document.createElement('option');
+            option.value = jabatan;
+            option.textContent = jabatan;
+            jabatanSelect.appendChild(option);
+        });
+    });
+});
+</script>
+<style>
+    #modalPengembalian .modal-dialog {
+  max-width: 800px; /* Sesuaikan dengan kebutuhan */
+  height: 90vh;
+}
+
+#modalPengembalian .modal-content {
+  height: 100%;
+}
+
+#modalPengembalian .modal-body {
+  max-height: calc(90vh - 120px); /* Tinggi viewport dikurangi header dan footer modal */
+  overflow-y: auto;
+  padding: 20px;
+}
+</style>
+            </div>
+
+            <!-- DEBUG-VIEW START 2 APPPATH\Views\admin\layouts\footer.php -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <p class="m-0">&copy; 2024 Kementerian Pekerjaan Umum. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+<!-- DEBUG-VIEW ENDED 2 APPPATH\Views\admin\layouts\footer.php -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://manajemenaset.idampalada.com//assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://manajemenaset.idampalada.com/assets/js/main.js?v=1745994898"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/timeline-peminjaman.js?v=1764059702"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/homepage.js?v=1764897858"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/laporan.js?v=1740989082"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/dashboard.js?v=1766112096"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/auth.js?v=1784515379"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/ubah-jam.js?v=1764045152"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/daftar-booking.js?v=1775721796"></script>
+<script src="https://manajemenaset.idampalada.com/assets/js/calendar-booking.js?v=1772699032"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/letterhead-surat.js"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/booking-ruangan.js?v=1775721755"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/ttesuratpermohonan.js?v=1765949161"></script>
+<script src="https://manajemenaset.idampalada.com/assets/js/ttesurat.js?v=1765953806"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/image-preview.js?v=1740989082"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/mainpage.js?v=1745219122"></script>
+    <script src="https://manajemenaset.idampalada.com/assets/js/scanbarang.js?v=1768099260"></script>
+
+    <script src="https://manajemenaset.idampalada.com/assets/js/pinjam-barang.js?v=1745482798"></script>
+
+
+
+        
+
+<script>
+        // Tambahkan variabel baseUrl di sini
+        const baseUrl = "https://manajemenaset.idampalada.com/"; 
+        
+        const csrfToken = {
+            name: 'csrf_test_name',
+            hash: '5def0ba3d9ad57fc25d1d46ec29cbda0'
+        };
+    </script>
+    <!-- Chart.js Datalabels Plugin -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+</body>
+
+</html>
+<!-- DEBUG-VIEW ENDED 3 APPPATH\Views\admin\layouts\app.php -->
+
+<!-- DEBUG-VIEW ENDED 4 APPPATH\Views\user\homepage.php -->
