@@ -1957,9 +1957,18 @@ body{
     transition:border-color .15s var(--kv-ease), box-shadow .15s var(--kv-ease);
 }
 .vc-card:hover{
-    border-color:var(--kv-border-control);
-    box-shadow:var(--kv-shadow-lg);
+    /* Kartu dibuat statis: nilai di bawah ini sengaja identik dengan kondisi
+       dasar .vc-card, sekaligus membatalkan .vc-card:hover{transform:
+       translateY(-4px); box-shadow:...} milik homepage.css (eksternal, lama)
+       yang tanpa ini masih aktif karena tidak pernah di-override. */
+    transform:none;
+    border-color:var(--kv-border);
+    box-shadow:var(--kv-shadow-sm);
 }
+/* Zoom lama ".vc-card:hover .vc-image" dari homepage.css dibatalkan di sini,
+   lalu diaktifkan ulang hanya saat gambar itu sendiri yang di-hover (bawah). */
+.vc-card:hover .vc-image{ transform:none; }
+.vc-card .vc-image:hover{ transform:scale(1.04); }
 .vc-card:focus-within{
     border-color:var(--kv-navy);
     box-shadow:0 0 0 3px var(--kv-primary-ring);
@@ -1970,6 +1979,7 @@ body{
     position:relative;
     padding:var(--kv-s5) var(--kv-s5) 0;
     background:transparent;
+    overflow:hidden; /* menahan zoom gambar agar tak bocor ke .vc-body */
 }
 .vc-image-wrap::before{
     /* static neutral placeholder; no shimmer animation */
@@ -1988,12 +1998,19 @@ body{
     background:var(--kv-surface-sunken);
     cursor:zoom-in;
     box-shadow:inset 0 0 0 1px rgba(22,25,29,.06);
+    /* transisi sendiri (220ms), menggantikan transition:transform .5s milik
+       homepage.css (eksternal, lama) yang sebelumnya bocor tanpa ini */
+    transition:transform 220ms var(--kv-ease);
 }
 
 /* --- status badge: the single status indicator on the card --- */
 .vc-status-badge{
-    position:absolute; top:32px; left:32px; z-index:2;
+    position:absolute; top:32px; left:32px; right:auto; z-index:2;
+    /* homepage.css (eksternal, lama) masih punya .vc-status-badge dengan
+       right:12px; tanpa right:auto di sini, left+right bersamaan membuat
+       badge melebar mengisi ruang di antara keduanya. */
     display:inline-flex; align-items:center; gap:6px;
+    width:fit-content; flex-grow:0;
     font-size:12px; font-weight:600; letter-spacing:.005em;
     padding:4px 9px;
     border-radius:var(--kv-radius-xs);
@@ -2125,6 +2142,9 @@ body{
 .vc-btn-info{
     background:var(--kv-navy); color:#fff; border-color:var(--kv-navy);
     font-weight:600;
+    /* homepage.css (eksternal, lama) masih punya box-shadow navy/hijau 4px 10px
+       untuk vc-btn-primary/success/info/secondary; dibatalkan di sini. */
+    box-shadow:none;
 }
 .vc-btn-primary:hover,
 .vc-btn-info:hover{ background:var(--kv-navy-hover); border-color:var(--kv-navy-hover); color:#fff; }
@@ -2134,6 +2154,7 @@ body{
 /* SECONDARY — outlined, desaturated */
 .vc-btn-success{
     background:var(--kv-surface); color:var(--kv-text-secondary); border-color:var(--kv-border-control);
+    box-shadow:none;
 }
 .vc-btn-success:hover{ background:var(--kv-surface-hover); border-color:var(--kv-border-strong); color:var(--kv-text); }
 .vc-btn-success:active{ background:var(--kv-border); }
@@ -2141,6 +2162,7 @@ body{
 /* TERTIARY — outlined, lighter frame */
 .vc-btn-secondary{
     background:var(--kv-surface); color:var(--kv-text-muted); border-color:var(--kv-border);
+    box-shadow:none;
 }
 .vc-btn-secondary:hover{ background:var(--kv-surface-hover); border-color:var(--kv-border-control); color:var(--kv-text); }
 .vc-btn-secondary:active{ background:var(--kv-border); }
